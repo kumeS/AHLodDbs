@@ -25,33 +25,43 @@
 #grep -e " <http://www.w3.org/2000/01/rdf-schema#label> " ./Label_en.nt > ./Label_en_rdfs.nt
 #grep -e " <http://www.w3.org/2004/02/skos/core#altLabel> " ./Label_en.nt > ./Label_en_Altlabel.nt
 #grep -e " <http://schema.org/description> " ./Label_en.nt > ./Label_en_description.nt
-#rm -rf ./Label_en.nt
 
 ##extract Japanese labels
 #grep -e "@ja ." ./Dump.nt > ./Label_ja.nt
 #grep -e " <http://www.w3.org/2000/01/rdf-schema#label> " ./Label_ja.nt > ./Label_ja_rdfs.nt
 #grep -e " <http://www.w3.org/2004/02/skos/core#altLabel> " ./Label_ja.nt > ./Label_ja_Altlabel.nt
 #grep -e " <http://schema.org/description> " ./Label_ja.nt > ./Label_ja_description.nt
-#rm -rf ./Label_ja.nt
 
 ##extract class hierarchy
 #grep -e " <http://www.wikidata.org/prop/direct/P279> " ./Dump.nt > ./Relation_P279.nt
 #grep -e " <http://www.wikidata.org/prop/direct/P31> " ./Dump.nt > ./Relation_P31.nt
 #cat ./Relation_P279.nt ./Relation_P31.nt > ./Relation_P279_P31.nt
 
-#extract property list
+##extract property list
 #grep -e "^<http://www.wikidata.org/prop/direct/P[0-9]" ./Dump.nt > ./PropertyList.nt
+#grep -e " <http://wikiba.se/ontology#directClaim> " ./Dump.nt > ./PropertyList_directClaim.nt
 
 ##Others
-#grep -v -e '"@[a-z]' ./Dump.nt > ./Relation_i.nt
+#grep -v -e '"@[a-z]' ./Dump.nt > ./Others_i.nt
 #grep -v -e " <http://www.wikidata.org/prop/direct/P31> " ./Others_i.nt > ./Others_ii.nt
 #grep -v -e " <http://www.wikidata.org/prop/direct/P279> " ./Others_ii.nt > ./Others_iii.nt
 #grep -e "^<http://www.wikidata.org/entity/Q[0-9]" ./Others_iii.nt > ./Others_iiii.nt
 
 #MeSH term ID (P6680)
+#grep -e " <http://www.wikidata.org/prop/direct/P6680> " ./Others_iiii.nt > ./Relation_MeSH_term_ID.nt
+
 #PubChem CID (P662)
+#grep -e " <http://www.wikidata.org/prop/direct/P662> " ./Others_iiii.nt > ./Relation_PubChem_CID.nt
+
 #KEGG ID (P665)
+#grep -e " <http://www.wikidata.org/prop/direct/P665> " ./Others_iiii.nt > ./Relation_KEGG_ID.nt
+
 #NCBI taxonomy ID (P685)
+#grep -e " <http://www.wikidata.org/prop/direct/P685> " ./Others_iiii.nt > ./Relation_NCBI_taxonomy_ID.nt
+
+#Remove files
+#rm -rf ./Label_en.nt ./Label_ja.nt ./Dump.nt
+#rm -rf ./Others_i.nt ./Others_i.nt ./Others_ii.nt ./Others_iii.nt ./Others_iiii.nt
 
 
 
