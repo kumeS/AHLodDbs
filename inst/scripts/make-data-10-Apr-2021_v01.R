@@ -42,6 +42,9 @@
 #grep -e "^<http://www.wikidata.org/entity/P[0-9]" ./Dump.nt > ./PropertyList_02.nt
 #grep -e " <http://wikiba.se/ontology#directClaim> " ./Dump.nt > ./PropertyList_directClaim.nt
 #cat PropertyList_01.nt PropertyList_02.nt PropertyList_directClaim.nt > PropertyList.nt
+#grep -v -e "\"@[a-z]" ./PropertyList.nt > ./PropertyList_at.nt
+#grep -e "@en ." ./PropertyList.nt > ./PropertyList_en.nt
+#grep -e "@ja ." ./PropertyList.nt > ./PropertyList_ja.nt
 
 ##Others
 #grep -v -e '"@[a-z]' ./Dump.nt > ./Others_i.nt
@@ -51,6 +54,9 @@
 
 #MeSH term ID (P6680)
 #grep -e " <http://www.wikidata.org/prop/direct/P6680> " ./Others_iiii.nt > ./Relation_MeSH_term_ID.nt
+
+#MeSH descriptor ID (P486)
+#grep -e " <http://www.wikidata.org/prop/direct/P486> " ./Others_iiii.nt > ./Relation_MeSH_descriptor_ID.nt
 
 #PubChem CID (P662)
 #grep -e " <http://www.wikidata.org/prop/direct/P662> " ./Others_iiii.nt > ./Relation_PubChem_CID.nt
@@ -102,10 +108,59 @@ system.time(readRDS(file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
 #system("open ../WikidataRDF-10-Apr-2021")
 #source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
 File_path <- "./Label_en_rdfs.nt"
-
 #Run
 PurseNT_Label(File_path)
 #close(con_file)
+DFcsv2Rdata(File_path)
 
-#Check the data
+######################################################
+#Relation_KEGG_ID.nt
+######################################################
+File_path <- "./Relation_KEGG_ID.nt"
+PurseNT_Others(File_path)
+DFcsv2Rdata(File_path)
+######################################################
+#Relation_MeSH_term_ID.nt
+######################################################
+File_path <- "./Relation_MeSH_term_ID.nt"
+PurseNT_Others(File_path)
+DFcsv2Rdata(File_path)
+######################################################
+#Relation_MeSH_descriptor_ID.nt
+######################################################
+File_path <- "./Relation_MeSH_term_ID.nt"
+PurseNT_Others(File_path)
+DFcsv2Rdata(File_path)
+######################################################
+#Relation_NCBI_taxonomy_ID.nt
+######################################################
+File_path <- "./Relation_NCBI_taxonomy_ID.nt"
+PurseNT_Others(File_path)
+DFcsv2Rdata(File_path)
+######################################################
+#Relation_PubChem_CID.nt
+######################################################
+File_path <- "./Relation_PubChem_CID.nt"
+PurseNT_Others(File_path)
+DFcsv2Rdata(File_path)
+
+######################################################
+#PropertyList_at.nt
+#PropertyList_en.nt
+#PropertyList_ja.nt
+######################################################
+File_path <- "./PropertyList.nt"
+PurseNT_Prop(File_path)
+#DFcsv2Rdata(File_path)
+
+Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
+
+Dat %>%
+  head() %>%
+  knitr::kable(format = "pipe", booktabs = T, align = "c") %>%
+  print()
+
+table(Dat[,2])
+table(Dat[,3])
+
 
