@@ -50,9 +50,6 @@
 #grep -v -e " <http://www.wikidata.org/prop/direct/P279> " ./Others_ii.nt > ./Others_iii.nt
 #grep -e "^<http://www.wikidata.org/entity/Q[0-9]" ./Others_iii.nt > ./Others_iiii.nt
 
-#MeSH term ID (P6680)
-#grep -e " <http://www.wikidata.org/prop/direct/P6680> " ./Others_iiii.nt > ./Relation_MeSH_term_ID.nt
-
 #MeSH descriptor ID (P486)
 #grep -e " <http://www.wikidata.org/prop/direct/P486> " ./Others_iiii.nt > ./Relation_MeSH_descriptor_ID.nt
 
@@ -66,12 +63,13 @@
 #grep -e " <http://www.wikidata.org/prop/direct/P685> " ./Others_iiii.nt > ./Relation_NCBI_taxonomy_ID.nt
 
 #Remove files
+#rm -rf ./Label_en.nt ./Label_ja.nt ./PropertyList_01.nt ./PropertyList_02.nt ./PropertyList_woat.nt ./PropertyList.nt
 #rm -rf ./Dump.nt ./Relation_P279.nt ./Relation_P31.nt ./Others_i.nt ./Others_ii.nt ./Others_iii.nt
 
 #ls -ul -h
-
 #Chnage Dir.
 setwd("./WikidataRDF-13-Oct-2020/")
+getwd()
 dir()
 
 ######################################################

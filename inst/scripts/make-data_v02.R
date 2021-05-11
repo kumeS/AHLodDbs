@@ -108,13 +108,22 @@ b[,2] <- sub("<http://www.w3.org/2004/02/skos/core#altLabel>", "skos:altLabel", 
 b[,2] <- sub("<http://schema.org/description>", "schema:description", b[,2])
 b[,2] <- sub("<http://schema.org/name>", "schema:name", b[,2])
 
+#convert matrix to DF
+b <- data.frame(b)
+#head(b)
+
 #Object
-##どう書くか？？
-
-
+b$X4 <- NA
+b[,4][grepl("@ja$", b[,3])] <- "@ja"
+b[,4][grepl("@en$", b[,3])] <- "@en"
+b[,3] <- sub("@ja$", "", b[,3])
+b[,3] <- sub("@en$", "", b[,3])
+b[,3] <- sub('"$', '', b[,3])
+b[,3] <- sub('^"', '', b[,3])
 
 #head(b)
 #dim(b)
+
 #convert matrix to DF
 d <- data.frame(b)
 
@@ -291,8 +300,6 @@ message(paste0('sum(grepl("^wd:", Dat[,3])): ', sum(grepl("^wd:", Dat[,3]))))
 saveRDS(Dat, file = paste0(sub(".nt", "", File_path), "_df.Rdata"))
 
 }
-
-
 
 Prefix <- data.frame(wd=c("wd:", "<http://www.wikidata.org/entity/", ">"),
                      wdt=c("wdt:", "<http://www.wikidata.org/prop/direct/", ">"),

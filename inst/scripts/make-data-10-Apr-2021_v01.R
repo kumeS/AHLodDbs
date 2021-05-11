@@ -52,9 +52,6 @@
 #grep -v -e " <http://www.wikidata.org/prop/direct/P279> " ./Others_ii.nt > ./Others_iii.nt
 #grep -e "^<http://www.wikidata.org/entity/Q[0-9]" ./Others_iii.nt > ./Others_iiii.nt
 
-#MeSH term ID (P6680)
-#grep -e " <http://www.wikidata.org/prop/direct/P6680> " ./Others_iiii.nt > ./Relation_MeSH_term_ID.nt
-
 #MeSH descriptor ID (P486)
 #grep -e " <http://www.wikidata.org/prop/direct/P486> " ./Others_iiii.nt > ./Relation_MeSH_descriptor_ID.nt
 
@@ -88,19 +85,18 @@ PurseNT_ClassHierarchy(File_path)
 #close(con_file)
 
 #Check the data
-Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
-head(Dat)
-dim(Dat)
-sum(grepl("^wd:", Dat[,1]))
-sum(grepl("^wdt:", Dat[,2]))
-sum(grepl("^wd:", Dat[,3]))
-system.time(saveRDS(Dat, file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
+#Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
+#head(Dat); dim(Dat)
+#sum(grepl("^wd:", Dat[,1]))
+#sum(grepl("^wdt:", Dat[,2]))
+#sum(grepl("^wd:", Dat[,3]))
+#system.time(saveRDS(Dat, file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
 #Time: 102.385 sec
 #rm(list=ls())
 
-system.time(data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE)))
+#system.time(data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE)))
 #Time: 72.664 sec
-system.time(readRDS(file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
+#system.time(readRDS(file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
 #Time: 90.694 sec
 
 
@@ -114,6 +110,18 @@ File_path <- "./Label_en_rdfs.nt"
 PurseNT_Label(File_path)
 #close(con_file)
 DFcsv2Rdata(File_path)
+
+######################################################
+##For Label_ja_rdfs.nt
+######################################################
+#system("open ../WikidataRDF-10-Apr-2021")
+#source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
+File_path <- "./Label_ja_rdfs.nt"
+#Run
+PurseNT_Label(File_path)
+
+
+
 
 ######################################################
 #Relation_KEGG_ID.nt
