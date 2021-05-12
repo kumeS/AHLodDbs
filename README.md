@@ -1,4 +1,4 @@
-# AHwikidataDbs
+# AHWikiDataDbs
 Supplies AnnotationHub with some preprocessed tibble datasets of wikidata N-triple dump.
 The original dataset is available in [Google Drive](https://drive.google.com/drive/folders/1jw96Cf2flGJLnKswcPf7XQ9Ia7vhU3Hv?usp=sharing).
 
