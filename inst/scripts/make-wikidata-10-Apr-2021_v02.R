@@ -69,88 +69,86 @@
 
 #ls -ul -h
 
-#Chnage Dir.
-setwd("./WikidataRDF-10-Apr-2021/")
+######################################################
+#Back to R.
+######################################################
+#setwd("../")
+getwd()
 dir()
+#system("open ./WikidataRDF-10-Apr-2021")
 
 ######################################################
 ##For Relation_P279_P31.nt
 ######################################################
-#system("open ../WikidataRDF-10-Apr-2021")
-#source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
-File_path <- "./Relation_P279_P31.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_P279_P31.nt"
+#File_path <- "./WikidataRDF-13-Oct-2020/Relation_P279_P31.nt"
 
-#Run
 PurseNT_ClassHierarchy(File_path)
-#close(con_file)
-
-#Check the data
-#Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
-#head(Dat); dim(Dat)
-#sum(grepl("^wd:", Dat[,1]))
-#sum(grepl("^wdt:", Dat[,2]))
-#sum(grepl("^wd:", Dat[,3]))
-#system.time(saveRDS(Dat, file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
-#Time: 102.385 sec
-#rm(list=ls())
-
-#system.time(data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE)))
-#Time: 72.664 sec
-#system.time(readRDS(file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
-#Time: 90.694 sec
-
-
-######################################################
-##For Label_en_rdfs.nt
-######################################################
-#system("open ../WikidataRDF-10-Apr-2021")
-#source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
-File_path <- "./Label_en_rdfs.nt"
-#Run
-PurseNT_Label(File_path)
-#close(con_file)
 DFcsv2Rdata(File_path)
 
 ######################################################
-##For Label_ja_rdfs.nt
+##For English Labels
 ######################################################
-#system("open ../WikidataRDF-10-Apr-2021")
-#source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
-File_path <- "./Label_ja_rdfs.nt"
-#Run
+#rdfs:label
+File_path <- "./WikidataRDF-10-Apr-2021/Label_en_rdfs.nt"
 PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
+#Altlabel
+File_path <- "./WikidataRDF-10-Apr-2021/Label_en_Altlabel.nt"
+PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
+#description
+File_path <- "./WikidataRDF-10-Apr-2021/Label_en_description.nt"
+PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
 
+######################################################
+##For Japanese Labels
+######################################################
+#rdfs:label
+File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_rdfs.nt"
+PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
+#Altlabel
+File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_Altlabel.nt"
+PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
+#description
+File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_description.nt"
+PurseNT_Label(File_path)
+DFcsv2Rdata(File_path)
 
+#Convert their unicode to Multi-Byte Character (Japanese)
 
 
 ######################################################
 #Relation_KEGG_ID.nt
 ######################################################
-File_path <- "./Relation_KEGG_ID.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_KEGG_ID.nt"
 PurseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_MeSH_term_ID.nt
 ######################################################
-File_path <- "./Relation_MeSH_term_ID.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_MeSH_term_ID.nt"
 PurseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_MeSH_descriptor_ID.nt
 ######################################################
-File_path <- "./Relation_MeSH_descriptor_ID.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_MeSH_descriptor_ID.nt"
 PurseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_NCBI_taxonomy_ID.nt
 ######################################################
-File_path <- "./Relation_NCBI_taxonomy_ID.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_NCBI_taxonomy_ID.nt"
 PurseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_PubChem_CID.nt
 ######################################################
-File_path <- "./Relation_PubChem_CID.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/Relation_PubChem_CID.nt"
 PurseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 
@@ -159,7 +157,7 @@ DFcsv2Rdata(File_path)
 #PropertyList_en.nt
 #PropertyList_ja.nt
 ######################################################
-File_path <- "./PropertyList_at2.nt"
+File_path <- "./WikidataRDF-10-Apr-2021/PropertyList_at2.nt"
 PurseNT_Prop(File_path)
 DFcsv2Rdata(File_path)
 

@@ -283,23 +283,6 @@ readr::write_csv(d,
 
 ############################################################
 ############################################################
-DFcsv2Rdata <- function(File_path){
-if(any(dir() == sub("^./", "", paste0(sub(".nt", "", File_path), "_df.Rdata")))){file.remove(paste0(sub(".nt", "", File_path), "_df.Rdata"))}
-Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
-
-Dat %>%
-  head() %>%
-  knitr::kable(format = "pipe", booktabs = T, align = "c") %>%
-  print()
-
-message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
-message(paste0('sum(grepl("^wd:", Dat[,1])): ', sum(grepl("^wd:", Dat[,1]))))
-message(paste0('sum(grepl("^wdt:", Dat[,2])): ', sum(grepl("^wdt:", Dat[,2]))))
-message(paste0('sum(grepl("^wd:", Dat[,3])): ', sum(grepl("^wd:", Dat[,3]))))
-
-saveRDS(Dat, file = paste0(sub(".nt", "", File_path), "_df.Rdata"))
-
-}
 
 Prefix <- data.frame(wd=c("wd:", "<http://www.wikidata.org/entity/", ">"),
                      wdt=c("wdt:", "<http://www.wikidata.org/prop/direct/", ">"),
