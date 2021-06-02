@@ -30,98 +30,66 @@
 getwd()
 dir()
 #system("open ./Mesh")
-
+######################################################
+#Load packages
+######################################################
+#library(magrittr)
 ######################################################
 ##For Relation
 ######################################################
-File_path <- "./Mesh/mesh2019_others2.nt"
 
+#Mesh2019
+File_path <- "./Mesh/mesh2019_others2.nt"
 Mesh_PurseNT(File_path)
-DFcsv2Rdata(File_path)
+DFcsv2Rds(File_path, Type="Mesh")
+
+#Mesh2020
+File_path <- "./Mesh/mesh2020_others2.nt"
+Mesh_PurseNT(File_path)
+DFcsv2Rds(File_path, Type="Mesh")
+
+#Mesh2021
+File_path <- "./Mesh/mesh2021_others2.nt"
+Mesh_PurseNT(File_path)
+DFcsv2Rds(File_path, Type="Mesh")
+
+#Mesh2019 + Mesh2020 + Mesh2021
+#system("cat ./Mesh/mesh2019_others2_df.csv ./Mesh/mesh2020_others2_df.csv ./Mesh/mesh2021_others2_df.csv > ./Mesh/mesh219_2020_2021_others2_df.csv &")
+File_path <- "./Mesh/mesh219_2020_2021_others2_df.csv"
+DFcsv2Rds(File_path, Type="Mesh")
 
 ######################################################
 ##For English Labels
 ######################################################
-#rdfs:label
-File_path <- "./WikidataRDF-10-Apr-2021/Label_en_rdfs.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-#Altlabel
-File_path <- "./WikidataRDF-10-Apr-2021/Label_en_Altlabel.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-#description
-File_path <- "./WikidataRDF-10-Apr-2021/Label_en_description.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
+File_path <- "./Mesh/mesh2019_Label_en.nt"
+Mesh_PurseNT_Label(File_path)
+DFcsv2Rds(File_path,  Type="MeshLabel")
+
+File_path <- "./Mesh/mesh2020_Label_en.nt"
+Mesh_PurseNT_Label(File_path)
+DFcsv2Rds(File_path,  Type="MeshLabel")
+
+File_path <- "./Mesh/mesh2021_Label_en.nt"
+Mesh_PurseNT_Label(File_path)
+DFcsv2Rds(File_path,  Type="MeshLabel")
+
+#Mesh2019 + Mesh2020 + Mesh2021
+#system("cat ./Mesh/mesh2019_Label_en_df.csv ./Mesh/mesh2020_Label_en_df.csv ./Mesh/mesh2021_Label_en_df.csv > ./Mesh/mesh219_2020_2021_Label_en_df.csv &")
+File_path <- "./Mesh/mesh219_2020_2021_Label_en_df.csv"
+DFcsv2Rds(File_path, Type="MeshLabel")
 
 ######################################################
-##For Japanese Labels
 ######################################################
-#rdfs:label
-File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_rdfs.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-#Altlabel
-File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_Altlabel.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-#description
-File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_description.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-#Convert their unicode to Multi-Byte Character (Japanese)
-
-
-######################################################
-#Relation_KEGG_ID.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/Relation_KEGG_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-######################################################
-#Relation_MeSH_term_ID.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/Relation_MeSH_term_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-######################################################
-#Relation_MeSH_descriptor_ID.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/Relation_MeSH_descriptor_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-######################################################
-#Relation_NCBI_taxonomy_ID.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/Relation_NCBI_taxonomy_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-######################################################
-#Relation_PubChem_CID.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/Relation_PubChem_CID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-
-######################################################
-#PropertyList_at2.nt
-#PropertyList_en.nt
-#PropertyList_ja.nt
-######################################################
-File_path <- "./WikidataRDF-10-Apr-2021/PropertyList_at2.nt"
-PurseNT_Prop(File_path)
-DFcsv2Rdata(File_path)
-
-Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
-
-Dat %>%
-  head() %>%
-  knitr::kable(format = "pipe", booktabs = T, align = "c") %>%
-  print()
-
-table(Dat[,2])
-table(Dat[,3])
+#Pre-Check
+#system(paste0("head ", paste0(sub(".nt$", "", File_path), "_df.csv")))
+#a <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"), col_names = F))
+#head(a)
+#table(grepl("^mesh", a[,1]))
+#table(grepl("^mesh", a[,2]))
+#table(grepl("^rdf:type", a[,2]))
+#table(grepl("^rdfs:label", a[,2]))
+#table(grepl("^mesh", a[,3]))
+#table(grepl("BLANK", a[,4]))
+#table(grepl("@en", a[,4]))
 
 

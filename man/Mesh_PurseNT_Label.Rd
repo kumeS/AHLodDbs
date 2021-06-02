@@ -4,7 +4,15 @@
 \alias{Mesh_PurseNT_Label}
 \title{Convert labels to CSV file for Mesh dump}
 \usage{
-Mesh_PurseNT_Label(File_path)
+Mesh_PurseNT_Label(
+  File_path,
+  Subject = c("http://id.nlm.nih.gov/mesh/2019/", "mesh2019:",
+    "http://id.nlm.nih.gov/mesh/2020/", "mesh2020:", "http://id.nlm.nih.gov/mesh/2021/",
+    "mesh2021:", "http://id.nlm.nih.gov/mesh/", "mesh:"),
+  Property = c("http://id.nlm.nih.gov/mesh/vocab#", "meshv:",
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:",
+    "http://www.w3.org/2000/01/rdf-schema#", "rdfs:")
+)
 }
 \arguments{
 \item{File_path}{a character vector for a N-triple (NT) file (.nt).}
