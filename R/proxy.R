@@ -5,18 +5,11 @@
 ##' @description This function provides the proxy settings.
 ##'
 ##' @author Satoshi Kume
-##' @export PurseNT
-##' @importFrom readr write_csv
-##' @importFrom readr read_lines
+##' @export ProxySet
 ##'
 ##' @examples \dontrun{
 ##'
-##' #Class hierarchy
-##' File_path <- "./mesh2019_others2.nt"
-##'
-##' # Run
-##' PurseNT(File_path)
-##' DFcsv2Rdata(File_path)
+##' ProxySet(Locations = "OECU")
 ##'
 ##' }
 ##'
@@ -34,5 +27,6 @@ Sys.setenv("http_proxy" = proxy_url)
 Sys.setenv("https_proxy" = proxy_url)
 Sys.setenv("ftp_proxy" = proxy_url)
 }
+
 }
 
