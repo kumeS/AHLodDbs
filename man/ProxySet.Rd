@@ -15,12 +15,7 @@ This function provides the proxy settings.
 \examples{
 \dontrun{
 
-#Class hierarchy
-File_path <- "./mesh2019_others2.nt"
-
-# Run
-PurseNT(File_path)
-DFcsv2Rdata(File_path)
+ProxySet(Locations = "OECU")
 
 }
 
