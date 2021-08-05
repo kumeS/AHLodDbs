@@ -32,38 +32,26 @@ getwd(); dir()
 ######################################################
 #Load packages
 ######################################################
-ProxySet(Locations = "OECU")
-devtools::install_github("kumeS/AHLodDbs")
+#ProxySet(Locations = "OECU")
+devtools::install_github("kumeS/AHLodDbs", force = TRUE)
 library(AHLodDbs)
 library(magrittr)
 ######################################################
 ##For Relation
 ######################################################
-
 #Mesh2021
 File_path <- "./mesh2021_others.nt"
 PurseNT(File_path)
 DFcsv2Rds(File_path, Type="Mesh")
 
+
 ######################################################
 ##For English Labels
 ######################################################
-File_path <- "./Mesh/mesh2019_Label_en.nt"
-Mesh_PurseNT_Label(File_path)
-DFcsv2Rds(File_path,  Type="MeshLabel")
-
-File_path <- "./Mesh/mesh2020_Label_en.nt"
-Mesh_PurseNT_Label(File_path)
-DFcsv2Rds(File_path,  Type="MeshLabel")
-
 File_path <- "./Mesh/mesh2021_Label_en.nt"
 Mesh_PurseNT_Label(File_path)
 DFcsv2Rds(File_path,  Type="MeshLabel")
 
-#Mesh2019 + Mesh2020 + Mesh2021
-#system("cat ./Mesh/mesh2019_Label_en_df.csv ./Mesh/mesh2020_Label_en_df.csv ./Mesh/mesh2021_Label_en_df.csv > ./Mesh/mesh219_2020_2021_Label_en_df.csv &")
-File_path <- "./Mesh/mesh219_2020_2021_Label_en_df.csv"
-DFcsv2Rds(File_path, Type="MeshLabel")
 
 ######################################################
 ######################################################

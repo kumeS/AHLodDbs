@@ -25,9 +25,11 @@
 ##'
 
 DFcsv2Rds <- function(File_path, Type){
-if(!any(Type == c("Mesh", "mesh", "MeshLabel", "meshlabel", "Wikidata", "wikidata", "ID"))){
+if(!any(Type == c("Mesh", "MeSH", "mesh", "MeshLabel", "meshlabel",
+                  "Wikidata", "wikidata", "WikiData", "ID"))){
   return(message("Warning: No proper value of Type"))
 }
+
 if(grepl("_df.csv$", File_path)){ File_path <- sub("_df.csv$", ".nt", File_path) }
 if(!grepl(".nt$", File_path)){ return(message("Warning: No proper value of File_path")) }
 if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
@@ -36,17 +38,15 @@ if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
 
 message(paste0("Read data"))
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"),
-                                  col_names = FALSE))
+                                  col_names = FALSE, progress=F))
 
 #head(Dat)
-switch(Type,
-       "Mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
+TypeL <- tolower(Type)
+switch(TypeL,
        "mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
-       "MeshLabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "meshlabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
-       "Wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
        "wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
-       "ID" = colnames(Dat) <- c("Subject", "Property", "Object")
+       "id" = colnames(Dat) <- c("Subject", "Property", "Object")
        )
 
 message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
