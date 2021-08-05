@@ -7,7 +7,7 @@
 ##'
 ##' @return CSV file
 ##' @author Satoshi Kume
-##' @export Mesh_PurseNT_Label
+##' @export PurseNT_Label
 ##' @importFrom readr write_csv
 ##'
 ##' @examples \dontrun{
@@ -16,13 +16,13 @@
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
 ##' #Run
-##' Mesh_PurseNT_Label(File_path)
+##' PurseNT_Label(File_path)
 ##' DFcsv2Rdata(File_path)
 ##'
 ##' }
 ##'
 
-Mesh_PurseNT_Label <- function(File_path,
+PurseNT_Label <- function(File_path,
                                Subject=c("http://id.nlm.nih.gov/mesh/2019/", "mesh2019:",
                                          "http://id.nlm.nih.gov/mesh/2020/", "mesh2020:",
                                          "http://id.nlm.nih.gov/mesh/2021/", "mesh2021:",

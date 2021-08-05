@@ -26,36 +26,21 @@
 ######################################################
 #Back to R.
 ######################################################
-#setwd("../")
+#rm(list=ls())
+setwd("./AHLodDbs_02_Dataset_v01/MeSH_RDF/v01")
 getwd()
 dir()
-#system("open ./Mesh")
 ######################################################
 #Load packages
 ######################################################
-#library(magrittr)
+library(magrittr)
 ######################################################
 ##For Relation
 ######################################################
 
-#Mesh2019
-File_path <- "./Mesh/mesh2019_others.nt"
-Mesh_PurseNT(File_path)
-DFcsv2Rds(File_path, Type="Mesh")
-
-#Mesh2020
-File_path <- "./Mesh/mesh2020_others.nt"
-Mesh_PurseNT(File_path)
-DFcsv2Rds(File_path, Type="Mesh")
-
 #Mesh2021
-File_path <- "./Mesh/mesh2021_others.nt"
-Mesh_PurseNT(File_path)
-DFcsv2Rds(File_path, Type="Mesh")
-
-#Mesh2019 + Mesh2020 + Mesh2021
-#system("cat ./Mesh/mesh2019_others_df.csv ./Mesh/mesh2020_others_df.csv ./Mesh/mesh2021_others_df.csv > ./Mesh/mesh219_2020_2021_others_df.csv &")
-File_path <- "./Mesh/mesh219_2020_2021_others_df.csv"
+File_path <- "./mesh2021_others.nt"
+PurseNT(File_path)
 DFcsv2Rds(File_path, Type="Mesh")
 
 ######################################################
