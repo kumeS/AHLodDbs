@@ -24,11 +24,12 @@
 ##' }
 ##'
 
-DFcsv2Rds <- function(File_path, Type="Mesh"){
-if(!any(Type == c("Mesh", "MeshLabel"))){return(message("Warning: No proper value of Type"))}
-
-if(grepl("_df.csv$", File_path)){File_path <- sub("_df.csv$", ".nt", File_path)}
-if(!grepl(".nt$", File_path)){return(message("Warning: No proper value of File_path"))}
+DFcsv2Rds <- function(File_path, Type){
+if(!any(Type == c("Mesh", "mesh", "MeshLabel", "meshlabel", "Wikidata", "wikidata", "ID"))){
+  return(message("Warning: No proper value of Type"))
+}
+if(grepl("_df.csv$", File_path)){ File_path <- sub("_df.csv$", ".nt", File_path) }
+if(!grepl(".nt$", File_path)){ return(message("Warning: No proper value of File_path")) }
 if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
   file.remove(paste0(sub(".nt", "", File_path), "_df.Rds"))
 }
@@ -37,9 +38,21 @@ message(paste0("Read data"))
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"),
                                   col_names = FALSE))
 
+#head(Dat)
 switch(Type,
        "Mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
-       "MeshLabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo")
+       "mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
+       "MeshLabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
+       "meshlabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
+       "Wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
+       "wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
+       "ID" = colnames(Dat) <- c("Subject", "Property", "Object")
+       )
+
+message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
+
+switch(Type,
+       "ID" = Dat <- Dat[!is.na(Dat$Object),]
        )
 
 Dat %>%
@@ -52,6 +65,7 @@ if(!YN){return(message("No save"))}
 
 message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
 saveRDS(Dat, file = paste0(sub(".nt$", "", File_path), "_df.Rds"))
+
 return(message("Finished!!"))
 
 }

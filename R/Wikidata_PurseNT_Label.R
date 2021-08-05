@@ -17,7 +17,7 @@
 ##'
 ##' #Run
 ##' Wikidata_PurseNT_Label(File_path)
-##' DFcsv2Rdata(File_path)
+##' DFcsv2Rds(File_path)
 ##'
 ##' }
 ##'

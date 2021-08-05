@@ -1,46 +1,32 @@
 ###################################################################
-#Data Dump Downlods: 28-May-2021 from Mesh Dump
+#Data Dump Downlods: 3th Sep 2019 from LSD Dump
 ###################################################################
 ######################################################
 ## Same processing for all files
 ######################################################
-## Pre-Processing on MacOSX Terminal
-##extract English labels
-#grep -e "@en ." ./mesh2019.nt > ./mesh2019_Label_en.nt &
-#grep -e "@en ." ./mesh2020.nt > ./mesh2020_Label_en.nt &
-#grep -e "@en ." ./mesh2021.nt > ./mesh2021_Label_en.nt &
-
-##extract others
-#grep -v -e "@en ." ./mesh2019.nt > ./mesh2019_others0.nt &
-#grep -v -e "@en ." ./mesh2020.nt > ./mesh2020_others0.nt &
-#grep -v -e "@en ." ./mesh2021.nt > ./mesh2021_others0.nt &
-
-#Check
-#grep -v -e "@[a-z]" ./mesh2019_others0.nt > ./mesh2019_others.nt &
-#grep -v -e "@[a-z]" ./mesh2020_others0.nt > ./mesh2020_others.nt &
-#grep -v -e "@[a-z]" ./mesh2021_others0.nt > ./mesh2021_others.nt &
-
-#Delete files
-#rm -rf mesh2021.nt mesh2020.nt mesh2019.nt mesh2021_others0.nt mesh2020_others0.nt mesh2019_others0.nt
-
+## No Pre-Processing on MacOSX Terminal
 ######################################################
 #Back to R.
 ######################################################
 #setwd("../")
 getwd()
 dir()
-#system("open ./Mesh")
+#system("open ./LSD_RDF/v01_raw")
 ######################################################
 #Load packages
 ######################################################
-#library(magrittr)
+library(magrittr)
+library(filesstrings)
+#??filesstrings
 ######################################################
 ##For Relation
 ######################################################
 
-#Mesh2019
-File_path <- "./Mesh/mesh2019_others.nt"
+#lsd_20190903.nt
+File_path <- "./LSD_RDF/v01_raw/lsd_20190903.nt"
 Mesh_PurseNT(File_path)
+
+filesstrings::file.move(File_path, sub("v01_raw", "v01", File_path))
 DFcsv2Rds(File_path, Type="Mesh")
 
 #Mesh2020
@@ -91,5 +77,6 @@ DFcsv2Rds(File_path, Type="MeshLabel")
 #table(grepl("^mesh", a[,3]))
 #table(grepl("BLANK", a[,4]))
 #table(grepl("@en", a[,4]))
+
 
 

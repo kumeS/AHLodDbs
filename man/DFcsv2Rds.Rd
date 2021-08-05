@@ -4,7 +4,7 @@
 \alias{DFcsv2Rds}
 \title{Convert CSV file to Rds file}
 \usage{
-DFcsv2Rds(File_path, Type = "Mesh")
+DFcsv2Rds(File_path, Type)
 }
 \arguments{
 \item{File_path}{a character vector for a N-triple (NT) file (.nt).}

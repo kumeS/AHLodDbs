@@ -24,7 +24,7 @@ File_path <- "./Label_en_rdfs.nt"
 
 #Run
 Wikidata_PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
+DFcsv2Rds(File_path)
 
 }
 

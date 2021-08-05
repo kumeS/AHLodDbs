@@ -77,88 +77,46 @@ dir()
 #system("open ./WikidataRDF-13-Oct-2020")
 
 ######################################################
-##For English Labels
-######################################################
-#rdfs:label
-File_path <- "./WikidataRDF-13-Oct-2020/Label_en_rdfs.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-#Altlabel
-File_path <- "./WikidataRDF-13-Oct-2020/Label_en_Altlabel.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-#description
-File_path <- "./WikidataRDF-13-Oct-2020/Label_en_description.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-######################################################
-##For Japanese Labels
-######################################################
-#rdfs:label
-File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_rdfs.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
-system(paste0("cat ", sub(".nt$", ".csv", File_path), " | sed 's/\\\u\(....\)/\&#x\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_nkf.csv", File_path)))
-
-#Altlabel
-File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_Altlabel.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-#description
-File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_description.nt"
-PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
-
-
-######################################################
 ##For Relation_P279_P31.nt
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/Relation_P279_P31.nt"
-PurseNT_ClassHierarchy(File_path)
-DFcsv2Rdata(File_path)
+Wikidata_PurseNT_ClassHierarchy(File_path)
+DFcsv2Rds(File_path)
 
-#label sets for Relation_P279_P31.nt
+#check
+if(F){
+a <- readRDS("./WikidataRDF-13-Oct-2020/v01/Relation_P279_P31_df.Rds")
+head(a, n=100)
+table(grepl("wd:", a$X1))
+table(grepl("wdt:", a$X2))
+table(grepl("wd:", a$X3))
 
-
-
+}
 
 ######################################################
 #Relation_KEGG_ID.nt
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/Relation_KEGG_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-######################################################
-#Relation_MeSH_term_ID.nt
-######################################################
-File_path <- "./WikidataRDF-13-Oct-2020/Relation_MeSH_term_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
+Wikidata_PurseNT_Others(File_path)
+DFcsv2Rds(File_path, Type="Wikidata")
 ######################################################
 #Relation_MeSH_descriptor_ID.nt
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/Relation_MeSH_descriptor_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
+Wikidata_PurseNT_Others(File_path)
+DFcsv2Rds(File_path, Type="Wikidata")
 ######################################################
 #Relation_NCBI_taxonomy_ID.nt
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/Relation_NCBI_taxonomy_ID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
+Wikidata_PurseNT_Others(File_path)
+DFcsv2Rds(File_path, Type="ID")
 ######################################################
 #Relation_PubChem_CID.nt
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/Relation_PubChem_CID.nt"
-PurseNT_Others(File_path)
-DFcsv2Rdata(File_path)
-
+Wikidata_PurseNT_Others(File_path)
+DFcsv2Rds(File_path, Type="ID")
 ######################################################
 #PropertyList_at2.nt
 #PropertyList_en.nt
@@ -166,7 +124,7 @@ DFcsv2Rdata(File_path)
 ######################################################
 File_path <- "./WikidataRDF-13-Oct-2020/PropertyList_at2.nt"
 PurseNT_Prop(File_path)
-DFcsv2Rdata(File_path)
+DFcsv2Rds(File_path)
 
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))
 
@@ -177,3 +135,46 @@ Dat %>%
 
 table(Dat[,2])
 table(Dat[,3])
+
+######################################################
+##For English Labels
+######################################################
+#rdfs:label
+File_path <- "./WikidataRDF-13-Oct-2020/Label_en_rdfs.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+#Altlabel
+File_path <- "./WikidataRDF-13-Oct-2020/Label_en_Altlabel.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+#description
+File_path <- "./WikidataRDF-13-Oct-2020/Label_en_description.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+
+
+######################################################
+##For Japanese Labels
+######################################################
+#rdfs:label
+File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_rdfs.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+system(paste0("cat ", sub(".nt$", ".csv", File_path), " | sed 's/\\\u\(....\)/\&#x\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_nkf.csv", File_path)))
+
+#Altlabel
+File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_Altlabel.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+#description
+File_path <- "./WikidataRDF-13-Oct-2020/Label_ja_description.nt"
+Wikidata_PurseNT_Label(File_path)
+DFcsv2Rds(File_path)
+
+
