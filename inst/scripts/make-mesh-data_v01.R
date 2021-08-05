@@ -28,11 +28,13 @@
 ######################################################
 #rm(list=ls())
 setwd("./AHLodDbs_02_Dataset_v01/MeSH_RDF/v01")
-getwd()
-dir()
+getwd(); dir()
 ######################################################
 #Load packages
 ######################################################
+ProxySet(Locations = "OECU")
+devtools::install_github("kumeS/AHLodDbs")
+library(AHLodDbs)
 library(magrittr)
 ######################################################
 ##For Relation
