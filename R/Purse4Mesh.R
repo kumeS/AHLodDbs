@@ -83,60 +83,32 @@ Dat$SubInfo[cc] <- paste0("Tree:", stringr::str_sub(Dat$Subject[cc], start=1, en
 #Tree
 #head(Dat)
 cc <- grepl("tree|Tree", Dat$Property)
-table(Dat$OtherInfo[cc])
-head(Dat[cc,])
+#head(Dat[cc,])
 Dat$OtherInfo[cc] <- "Tree"
 Dat$ObjInfo[cc] <- paste0("Tree:", stringr::str_sub(Dat$Object[cc], start=1, end=6))
-head(Dat[cc,])
 
 cc1 <- grepl("rdf:type", Dat$Property)
 cc2 <- grepl("tree|Tree", Dat$Object)
 cc3 <- apply(data.frame(cc1, cc2), 1, all)
-
-head(cc3)
-head(Dat[cc3,])
-table(Dat$OtherInfo[cc3])
 Dat$OtherInfo[cc3] <- "Tree"
 Dat$ObjInfo[cc3] <- "Tree"
-head(Dat[cc3,])
-tail(Dat[cc3,])
+#head(Dat[cc3,])
 
 #Descriptor
 cc <- grepl("^mesh:[A-Z][0-9][0-9][0-9]", Dat$Object)
-table(Dat$OtherInfo[cc])
-head(Dat[cc,])
-
 Dat$OtherInfo[cc] <- "IDs"
 Dat$ObjInfo[cc] <- paste0("IDs:", stringr::str_sub(Dat$Object[cc], start=1, end=6))
-head(Dat[cc,])
+#head(Dat[cc,])
 
+#Identifier
 cc <- grepl("^[A-Z][0-9][0-9][0-9][0-9]", Dat$Object)
-table(Dat$OtherInfo[cc])
-head(Dat[cc,])
 Dat$OtherInfo[cc] <- "identifier"
 Dat$ObjInfo[cc] <- paste0("identifier:", stringr::str_sub(Dat$Object[cc], start=1, end=1))
-head(Dat[cc,])
+#head(Dat[cc,])
 
-length(unique(Dat$Subject))
-length(unique(Dat$Property))
-length(unique(Dat$Object))
-length(unique(Dat$OtherInfo))
-#table(Dat$OtherInfo)
-
-head(Dat)
-table(is.na(Dat$ObjInfo))
-table(is.na(Dat$OtherInfo))
-Dat[is.na(Dat$OtherInfo),]
+#head(Dat)
 Dat[is.na(Dat$OtherInfo),"OtherInfo"] <- "BLANK"
-
-table(Dat$SubInfo)
-table(Dat$ObjInfo)
-
-table(Dat$SubInfo == "BLANK")
-table(Dat$ObjInfo == "BLANK")
-#BLANK 6722756
-
-saveRDS(Dat, "./00_Mesh_Input/mesh2021_others_df_R.Rds")
+saveRDS(Dat, paste0(sub(".nt$", "", File_path), "_df_R01.Rds"))
 
 #Use the below propertys for researching the class hierarchy.
 # meshv:broaderDescriptor
@@ -146,39 +118,36 @@ saveRDS(Dat, "./00_Mesh_Input/mesh2021_others_df_R.Rds")
 # meshv:preferredConcept
 # meshv:preferredConcept => reversePreferredConcept
 
-##mesh2021_others_df_RR.Rds
-rm(list=ls())
-
-Dat <- readRDS("./00_Mesh_Input/mesh2021_others_df_R.Rds")
-head(Dat); dim(Dat)
-table(Dat$Property)
+##Check
+#head(Dat); dim(Dat); table(Dat$Property)
 
 #001
 List <- c("meshv:broaderDescriptor", "meshv:broaderConcept", "meshv:preferredConcept")
-Dat.broaderDescriptor <- Dat[Dat$Property %in% List,]
-head(Dat.broaderDescriptor)
-table(Dat.broaderDescriptor$Property)
-table(Dat.broaderDescriptor$SubInfo, Dat.broaderDescriptor$Property)
-table(Dat.broaderDescriptor$Property, Dat.broaderDescriptor$ObjInfo )
+Dat.bDes <- Dat[Dat$Property %in% List,]
+#head(Dat.bDes)
+#table(Dat.bDes$Property)
+#table(Dat.bDes$SubInfo, Dat.bDes$Property)
+#table(Dat.bDes$Property, Dat.bDes$ObjInfo )
 
-Dat.broaderDescriptorR <- Dat.broaderDescriptor[Dat.broaderDescriptor$Property == "meshv:broaderConcept",]
-table(Dat.broaderDescriptorR$SubInfo, Dat.broaderDescriptorR$Property)
-table(Dat.broaderDescriptorR$Property, Dat.broaderDescriptorR$ObjInfo )
-head(Dat.broaderDescriptorR)
-dim(Dat.broaderDescriptorR)
-a <- Dat.broaderDescriptorR[Dat.broaderDescriptorR$Subject %in% Dat.broaderDescriptorR$Object,]
-dim(a)
+##meshv:broaderConcept
+#Dat.bDesR <- Dat.bDes[Dat.bDes$Property == "meshv:broaderConcept",]
+#table(Dat.bDesR$SubInfo, Dat.bDesR$Property)
+#table(Dat.bDesR$Property, Dat.bDesR$ObjInfo )
+#head(Dat.bDesR); dim(Dat.bDesR)
+#a <- Dat.bDesR[Dat.bDesR$Subject %in% Dat.bDesR$Object,]
+#dim(a)
 
-Dat.broaderDescriptorRR <- Dat.broaderDescriptor[Dat.broaderDescriptor$Property == "meshv:broaderDescriptor",]
-table(Dat.broaderDescriptorRR$SubInfo, Dat.broaderDescriptorRR$Property)
-table(Dat.broaderDescriptorRR$Property, Dat.broaderDescriptorRR$ObjInfo )
-head(Dat.broaderDescriptorRR)
-dim(Dat.broaderDescriptorRR)
-a <- Dat.broaderDescriptorRR[Dat.broaderDescriptorRR$Subject %in% Dat.broaderDescriptorRR$Object,]
-dim(a)
-b <- Dat.broaderDescriptorRR[Dat.broaderDescriptorRR$Subject %in% a$Object,]
-dim(b)
+##meshv:broaderDescriptor
+#Dat.bDesRR <- Dat.bDes[Dat.bDes$Property == "meshv:broaderDescriptor",]
+#table(Dat.bDesRR$SubInfo, Dat.bDesRR$Property)
+#table(Dat.bDesRR$Property, Dat.bDesRR$ObjInfo )
+#head(Dat.bDesRR); dim(Dat.bDesRR)
+#a <- Dat.bDesRR[Dat.bDesRR$Subject %in% Dat.bDesRR$Object,]
+#dim(a)
+#b <- Dat.bDesRR[Dat.bDesRR$Subject %in% a$Object,]
+#dim(b)
 
+#ここまで
 #002: meshv:concept
 Dat.concept <- Dat[Dat$Property == "meshv:concept",]
 table(Dat.concept$SubInfo, Dat.concept$Property)
@@ -235,7 +204,7 @@ Dat.pC$SubInfo <- Dat.pCR$ObjInfo
 Dat.pC$ObjInfo <- Dat.pCR$SubInfo
 
 library(magrittr)
-DatR <- Dat.broaderDescriptor %>%
+DatR <- Dat.bDes %>%
   rbind(Dat.concept) %>%
   rbind(Dat.nC) %>%
   rbind(Dat.pC)
