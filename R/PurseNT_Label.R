@@ -1,4 +1,4 @@
-##' @title Convert labels to CSV file for Mesh dump
+##' @title Convert labels to CSV file
 ##'
 ##' @param File_path a character vector for a N-triple (NT) file (.nt).
 ##'
@@ -44,6 +44,7 @@ a <- sub(">\t", "> ", a)
 }
 
 message(paste0("Split data"))
+
 #AiBiCiDiEiFiG: Unique arbitrary string
 a1 <- unlist(strsplit(sub(" ", "AiBiCiDiEiFiG", sub(" ", "AiBiCiDiEiFiG", a)), split="AiBiCiDiEiFiG"))
 if( ( length(a1) %% 3 ) == 0 ){
