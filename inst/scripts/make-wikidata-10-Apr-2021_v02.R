@@ -76,6 +76,7 @@
 getwd()
 dir()
 #system("open ./WikidataRDF-10-Apr-2021")
+#setwd("/Users/skume/Research/02_DL_BioPack/00_Package_AHLodDbs/AHLodDbs_02_Dataset_v01")
 
 ######################################################
 ##For Relation_P279_P31.nt
@@ -102,6 +103,9 @@ File_path <- "./WikidataRDF-10-Apr-2021/Label_en_description.nt"
 PurseNT_Label(File_path)
 DFcsv2Rdata(File_path)
 
+#Bind
+system("cat ./WikidataRDF-10-Apr-2021/Label_en_rdfs_df.csv ./WikidataRDF-10-Apr-2021/Label_en_Altlabel_df.csv > ./WikidataRDF-10-Apr-2021/Label_en_rdfs_Altlabel_df.csv")
+
 ######################################################
 ##For Japanese Labels
 ######################################################
@@ -109,17 +113,28 @@ DFcsv2Rdata(File_path)
 File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_rdfs.nt"
 PurseNT_Label(File_path)
 DFcsv2Rdata(File_path)
+
+#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
+
 #Altlabel
 File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_Altlabel.nt"
 PurseNT_Label(File_path)
 DFcsv2Rdata(File_path)
+
+#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
+
 #description
 File_path <- "./WikidataRDF-10-Apr-2021/Label_ja_description.nt"
 PurseNT_Label(File_path)
 DFcsv2Rdata(File_path)
 
-#Convert their unicode to Multi-Byte Character (Japanese)
+#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
 
+#Bind
+system("cat ./WikidataRDF-10-Apr-2021/Label_ja_rdfs_df_nkf.csv ./WikidataRDF-10-Apr-2021/Label_ja_Altlabel_df_nkf.csv > ./WikidataRDF-10-Apr-2021/Label_ja_rdfs_Altlabel_df_nkf.csv")
 
 ######################################################
 #Relation_KEGG_ID.nt
