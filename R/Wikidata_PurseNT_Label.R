@@ -1,6 +1,7 @@
 ##' @title Convert labels to CSV file for Wikidata dump
 ##'
 ##' @param File_path a character vector for a N-triple (NT) file (.nt).
+##' @param readr use readr function or not
 ##'
 ##' @description This function convert the NT file from the Wikidata dump
 ##' to CSV file.
@@ -22,7 +23,7 @@
 ##' }
 ##'
 
-Wikidata_PurseNT_Label <- function(File_path){
+Wikidata_PurseNT_Label <- function(File_path, readr=F){
 if(!grepl(".nt$", File_path)){return(message("Warning: Not proper value of File_path"))}
 con_file <- file(description = File_path, open = "r")
 print(con_file)
@@ -81,15 +82,30 @@ b[,3] <- sub('^"', '', b[,3])
 
 #convert matrix to DF
 d <- data.frame(b)
+#head(d)
+#d$X3
 
+if(readr){
 if(x == 1){
 readr::write_csv(d,
-                 file=paste0(sub(".nt$", "", File_path), "_df.csv"),
-                 append=FALSE, col_names = FALSE)
+           file=paste0(sub(".nt$", "", File_path), "_df.csv"),
+           append=F, col_names = F)
 }else{
 readr::write_csv(d,
-                 file=paste0(sub(".nt$", "", File_path), "_df.csv"),
-                 append=TRUE, col_names = FALSE)
-}}
+           file=paste0(sub(".nt$", "", File_path), "_df.csv"),
+           append=F, col_names = F)
+}
+}else{
+if(x == 1){
+write.table(d,
+           file=paste0(sub(".nt$", "", File_path), "_df.csv"),
+           append=F, col.names = F, row.names=F, sep=",")
+}else{
+write.table(d,
+           file=paste0(sub(".nt$", "", File_path), "_df.csv"),
+           append=T, col.names = F, row.names=F, sep=",")
+}
+}
+}
 #close(con_file)
 }

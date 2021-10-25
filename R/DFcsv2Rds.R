@@ -26,19 +26,27 @@
 
 DFcsv2Rds <- function(File_path, Type){
 if(!any(Type == c("Mesh", "MeSH", "mesh", "MeshLabel", "meshlabel",
-                  "Wikidata", "wikidata", "WikiData", "ID"))){
+                  "Wikidata", "wikidata", "WikiData", "ID",
+                  "wikilabel", "wikiLabel", "WikiLabel", "Wikilabel"))){
   return(message("Warning: No proper value of Type"))
 }
 
 if(grepl("_df.csv$", File_path)){ File_path <- sub("_df.csv$", ".nt", File_path) }
+if(grepl("_df_nkf.csv$", File_path)){ File_path <- sub("_df_nkf.csv$", ".nt", File_path) }
 if(!grepl(".nt$", File_path)){ return(message("Warning: No proper value of File_path")) }
 if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
   file.remove(paste0(sub(".nt", "", File_path), "_df.Rds"))
 }
 
 message(paste0("Read data"))
+if(grepl("_df.nt$", File_path)){
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"),
-                                  col_names = FALSE, progress=F))
+                                  col_names = FALSE, progress=F, show_col_types = FALSE))
+}
+if(grepl("_df_nkf.nt$", File_path)){
+Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), ".csv"),
+                                  col_names = FALSE, progress=F, show_col_types = FALSE))
+}
 
 #head(Dat)
 TypeL <- tolower(Type)
@@ -46,6 +54,7 @@ switch(TypeL,
        "mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "meshlabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
+       "wikilabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "id" = colnames(Dat) <- c("Subject", "Property", "Object")
        )
 

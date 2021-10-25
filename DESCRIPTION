@@ -1,7 +1,7 @@
 Package: AHLodDbs
 Type: Package
 Title: Linked open data for converting the RDF data to data frame in R
-Version: 0.99.1
+Version: 0.99.2
 Encoding: UTF-8
 Authors@R: c(
     person (given = "Satoshi", family = "Kume",
@@ -9,7 +9,7 @@ Authors@R: c(
     email = "satoshi.kume.1984@gmail.com",
     comment = c(ORCID = "0000-0001-7481-2843"))
     )
-Depends: R (>= 4.1.0)
+Depends: R (>= 4.0.0)
 Imports: markdown, 
   rmarkdown, 
   knitr

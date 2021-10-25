@@ -1,6 +1,6 @@
 ##' @title Proxy settings
 ##'
-##' @param Locations a character vector
+##' @param proxy_url a character vector of proxy URI.
 ##'
 ##' @description This function provides the proxy settings.
 ##'
@@ -9,24 +9,15 @@
 ##'
 ##' @examples \dontrun{
 ##'
-##' ProxySet(Locations = "OECU")
+##' proxy_url = "http://wwwproxy.osakac.ac.jp:8080"
+##' ProxySet(proxy_url)
 ##'
 ##' }
 ##'
 
-ProxySet <- function(Locations){
-
-switch(Locations,
-      "OECU" = m <- 1,
-      m <- 0
-      )
-
-if(m == 1){
-proxy_url = "http://wwwproxy.osakac.ac.jp:8080"
+ProxySet <- function(proxy_url){
 Sys.setenv("http_proxy" = proxy_url)
 Sys.setenv("https_proxy" = proxy_url)
 Sys.setenv("ftp_proxy" = proxy_url)
-}
-
 }
 
