@@ -4,10 +4,10 @@
 \alias{ProxySet}
 \title{Proxy settings}
 \usage{
-ProxySet(Locations)
+ProxySet(proxy_url)
 }
 \arguments{
-\item{Locations}{a character vector}
+\item{proxy_url}{a character vector of proxy URI.}
 }
 \description{
 This function provides the proxy settings.
@@ -15,7 +15,8 @@ This function provides the proxy settings.
 \examples{
 \dontrun{
 
-ProxySet(Locations = "OECU")
+proxy_url = "http://wwwproxy.osakac.ac.jp:8080"
+ProxySet(proxy_url)
 
 }
 

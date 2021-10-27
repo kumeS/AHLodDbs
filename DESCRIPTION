@@ -1,7 +1,7 @@
 Package: AHLodDbs
 Type: Package
 Title: Linked open data for converting the RDF data to data frame in R
-Version: 0.99.2
+Version: 0.99.3
 Encoding: UTF-8
 Authors@R: c(
     person (given = "Satoshi", family = "Kume",
@@ -12,12 +12,14 @@ Authors@R: c(
 Depends: R (>= 4.0.0)
 Imports: markdown, 
   rmarkdown, 
-  knitr
+  knitr,
+  magrittr
 Suggests: BiocStyle
-Description: The package provides ...
+Description: This package provides a processing workflow for converting 
+  RDF dump data (Wikidata, MeSH, and ChEBI) as a R data frame format.
 VignetteBuilder: knitr
 License: Artistic-2.0
 URL: https://github.com/kumeS/AHLodDbs
 LazyLoad: yes
 biocViews: AnnotationHub
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

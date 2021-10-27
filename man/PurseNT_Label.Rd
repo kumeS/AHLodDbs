@@ -2,7 +2,7 @@
 % Please edit documentation in R/PurseNT_Label.R
 \name{PurseNT_Label}
 \alias{PurseNT_Label}
-\title{Convert labels to CSV file for Mesh dump}
+\title{Convert labels to CSV file}
 \usage{
 PurseNT_Label(
   File_path,

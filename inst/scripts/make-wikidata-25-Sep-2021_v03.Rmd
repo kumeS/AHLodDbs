@@ -1,30 +1,54 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data Dump Version: 25-Sep-2021 09:44 from Wikidata Dump
+
+## Download the dump data
+
+```{r echo=TRUE, eval=FALSE}
 ###################################################################
-#Data Dump Version: 25-Sep-2021 09:44 from Wikidata Dump
+# You should remove the single comment out "#".
 ###################################################################
+##Install
+#devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
+library(AHLodDbs)
+
 ##Create Directory
 if(!dir.exists("Dump")){dir.create("Dump")}
 
-##Download on the Mac OSX Terminal from the original dump
+##Download from the original dump (latest)
 #system("wget -b https://dumps.wikimedia.org/wikidatawiki/entities/latest-truthy.nt.bz2")
 #system("mv latest-truthy.nt.bz2 ./Dump/WikidataRDF-25-Sep-2021.nt.bz2")
 
 ##Alternative way: Download from Public_Repository_for_AHWikiDataDbs
-#source ./gdrive_download.sh
-#gdrive_download 1tS3nngpJzsT7-fOb_lrXZWBwwze_xnmV ./Dump/WikidataRDF-25-Sep-2021.nt.bz2
+#fp <- system.file("scripts", "gdrive_download.sh", package="AHLodDbs")
 
-##Decompress the bz2 file
+##source
+#system(paste0("source ", fp))
+
+##Download the file
+#system("gdrive_download 1tS3nngpJzsT7-fOb_lrXZWBwwze_xnmV ./Dump/WikidataRDF-25-Sep-2021.nt.bz2 &")
+```
+
+## Decompress the bz2 file
+
+```{r echo=TRUE, eval=FALSE}
 setwd("./Dump")
 getwd()
 
 ##unzip
 #system("bunzip2 -k WikidataRDF-25-Sep-2021.nt.bz2")
+
 ##rename
 #system("mv WikidataRDF-25-Sep-2021.nt Dump.nt")
+```
 
-######################################################
-## Same processing for all files
-######################################################
-## Pre-Processing on MacOSX Terminal
+## Pre-Processing on R via sh scripts
+
+```{r echo=TRUE, eval=FALSE}
 ##extract English labels
 #system('grep -e "@en ." ./Dump.nt > ./Label_en.nt')
 #system('grep -e " <http://www.w3.org/2000/01/rdf-schema#label> " ./Label_en.nt > ./Label_en_rdfs.nt')
@@ -46,96 +70,120 @@ getwd()
 #system('grep -e "^<http://www.wikidata.org/prop/direct/P[0-9]" ./Dump.nt > ./PropertyList_01.nt')
 #system('grep -e "^<http://www.wikidata.org/entity/P[0-9]" ./Dump.nt > ./PropertyList_02.nt')
 #system('cat PropertyList_01.nt PropertyList_02.nt > PropertyList.nt')
-#system('rm -rf ./Dump/PropertyList_01.nt ./Dump/PropertyList_02.nt')
+#system('rm -rf PropertyList_01.nt PropertyList_02.nt')
 
-######################################################
+#system("grep -v -e '\"@' PropertyList.nt > PropertyList_wo.nt")
+#system("grep -e '\"@' PropertyList.nt > PropertyList_w.nt")
+#system("grep -e '\"@en .' PropertyList_w.nt > PropertyList_w_en.nt")
+#system("grep -e '\"@ja .' PropertyList_w.nt > PropertyList_w_ja.nt")
+#system('cat PropertyList_w.nt PropertyList_w_en.nt PropertyList_w_ja.nt > PropertyList_all.nt')
+#system("grep -e '\"@' PropertyList_all.nt > PropertyList_labels.nt")
+#system('rm -rf PropertyList_wo.nt PropertyList_w.nt PropertyList_w_en.nt PropertyList_w_ja.nt')
+
 ##Others
-######################################################
 #system("grep -v -e '\"@[a-z]' ./Dump.nt > ./Others_i.nt")
 #system('grep -v -e " <http://www.wikidata.org/prop/direct/P31> " ./Others_i.nt > ./Others_ii.nt')
 #system('grep -v -e " <http://www.wikidata.org/prop/direct/P279> " ./Others_ii.nt > ./Others_iii.nt')
 #system('grep -e "^<http://www.wikidata.org/entity/Q[0-9]" ./Others_iii.nt > ./Others_iiii.nt')
 
-#MeSH descriptor ID (P486)
+##MeSH descriptor ID (P486)
 #system('grep -e " <http://www.wikidata.org/prop/direct/P486> " ./Others_iiii.nt > ./Relation_MeSH_descriptor_ID.nt')
 
-#PubChem CID (P662)
+##PubChem CID (P662)
 #system('grep -e " <http://www.wikidata.org/prop/direct/P662> " ./Others_iiii.nt > ./Relation_PubChem_CID.nt')
 
-#KEGG ID (P665)
+##KEGG ID (P665)
 #system('grep -e " <http://www.wikidata.org/prop/direct/P665> " ./Others_iiii.nt > ./Relation_KEGG_ID.nt')
 
-#NCBI taxonomy ID (P685)
+##NCBI taxonomy ID (P685)
 #system('grep -e " <http://www.wikidata.org/prop/direct/P685> " ./Others_iiii.nt > ./Relation_NCBI_taxonomy_ID.nt')
 
-#Remove files
+##Remove files
 #system('rm -rf ./Dump.nt ./Relation_P279.nt ./Relation_P31.nt ./Others_i.nt ./Others_ii.nt ./Others_iii.nt')
 #system('ls -ul -h')
+```
 
-######################################################
-#Back to R.
-######################################################
+## Pre-Processing via R scripts
+
+```{r echo=TRUE, eval=FALSE}
 setwd("../")
 getwd()
 dir("./Dump")
-
-#Install
-#devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
 library(AHLodDbs)
-######################################################
-##For Relation_P279_P31.nt
-######################################################
+library(magrittr)
+```
+
+## For Relation_P279_P31.nt
+
+```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_P279_P31.nt"
 Wikidata_PurseNT_ClassHierarchy(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
-file.remove(c("./Dump/Relation_P279_P31_df.csv"))
+file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 
 if(F){
 #Check Data
-Dat <- readRDS("./Dump/Relation_P279_P31_df.Rds")
+Dat <- readRDS(paste0(sub(".nt$", "", File_path), "_df.Rds"))
 
 head(Dat)
 table(grepl("^wd:Q", Dat$Subject))
-table(grepl("^wdt:P", Dat$Property))
+table(grepl("^rdf", Dat$Property))
 table(Dat$Property)
 table(grepl("^wd:Q", Dat$Object))
 }
 
-######################################################
-##For English Labels
-######################################################
-#rdfs:label
+```
+
+## For English Labels
+
+```{r echo=TRUE, eval=FALSE}
+##rdfs:label
 File_path <- "./Dump/Label_en_rdfs.nt"
 Wikidata_PurseNT_Label(File_path)
 DFcsv2Rds(File_path, Type="wikilabel")
 
-#Altlabel
+##Altlabel
 File_path <- "./Dump/Label_en_Altlabel.nt"
 Wikidata_PurseNT_Label(File_path)
 DFcsv2Rds(File_path, Type="wikilabel")
 
-#description
-File_path <- "./Dump/Label_en_description.nt"
-Wikidata_PurseNT_Label(File_path)
-DFcsv2Rds(File_path, Type="wikilabel")
+if(F){
+##Check Data
+Dat <- readRDS("./Dump/Label_en_rdfs_df.Rds")
 
+head(Dat)
+table(grepl("^wd:Q", Dat$Subject))
+table(Dat$Property)
+table(grepl("^wd:Q", Dat$Object))
+table(Dat$OtherInfo)
+}
 
-######################################################
-##For Japanese Labels
-######################################################
-##############################
-#rdfs:label
-##############################
+#Bind labels
+Label_en_rdfs_df <- readRDS("./Dump/Label_en_rdfs_df.Rds")
+Label_en_Altlabel_df <- readRDS("./Dump/Label_en_Altlabel_df.Rds")
+#head(Label_en_rdfs_df); head(Label_en_Altlabel_df)
+Label_en_All <- rbind(Label_en_rdfs_df, Label_en_Altlabel_df)
+dim(Label_en_All)
+saveRDS(Label_en_All, "./Dump/Label_en_All.Rds")
+
+```
+
+## For Japanese Labels
+
+You need to install the `nkf` library via Homebrew if MacOSX.
+
+```{r echo=TRUE, eval=FALSE}
+##rdfs:label
 File_path <- "./Dump/Label_ja_rdfs.nt"
 Wikidata_PurseNT_Label(File_path)
 
-#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
 Proc_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
 file.remove(c("./Dump/Label_ja_rdfs_df_nkf.csv", "./Dump/Label_ja_rdfs_df.csv"))
 
 if(F){
-#Check Data
+##Check Data
 Dat <- readRDS("./Dump/Label_ja_rdfs_df.Rds")
 
 head(Dat)
@@ -145,45 +193,60 @@ table(grepl("^wd:Q", Dat$Object))
 table(Dat$OtherInfo)
 }
 
-##############################
-#Altlabel
-##############################
+##Altlabel
 File_path <- "./Dump/Label_ja_Altlabel.nt"
 Wikidata_PurseNT_Label(File_path)
 
-#Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
+##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
 Proc_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
 file.remove(c("./Dump/Label_ja_Altlabel_df.csv", "./Dump/Label_ja_Altlabel_df_nkf.csv"))
 
-######################################################
-#Relation_KEGG_ID.nt
-######################################################
+#Bind labels
+Label_ja_rdfs_df <- readRDS("./Dump/Label_ja_rdfs_df.Rds")
+Label_ja_Altlabel_df <- readRDS("./Dump/Label_ja_Altlabel_df.Rds")
+#head(Label_ja_rdfs_df); head(Label_ja_Altlabel_df)
+Label_ja_All <- rbind(Label_ja_rdfs_df, Label_ja_Altlabel_df)
+dim(Label_ja_All)
+saveRDS(Label_ja_All, "./Dump/Label_ja_All.Rds")
+```
+
+## Relation_KEGG_ID.nt
+
+```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_KEGG_ID.nt"
 Wikidata_PurseNT_Others(File_path)
-DFcsv2Rds(File_path)
-######################################################
-#Relation_MeSH_term_ID.nt
-######################################################
-File_path <- "./Dump/Relation_MeSH_term_ID.nt"
-Wikidata_PurseNT_Others(File_path)
-DFcsv2Rds(File_path)
-######################################################
-#Relation_MeSH_descriptor_ID.nt
-######################################################
+DFcsv2Rds(File_path, Type="wikidata")
+file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
+```
+
+## Relation_MeSH_descriptor_ID.nt
+
+```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_MeSH_descriptor_ID.nt"
 Wikidata_PurseNT_Others(File_path)
-DFcsv2Rds(File_path)
-######################################################
-#Relation_NCBI_taxonomy_ID.nt
-######################################################
+DFcsv2Rds(File_path, Type="wikidata")
+file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
+```
+
+## Relation_NCBI_taxonomy_ID.nt
+
+```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_NCBI_taxonomy_ID.nt"
 Wikidata_PurseNT_Others(File_path)
-DFcsv2Rds(File_path)
-######################################################
-#Relation_PubChem_CID.nt
-######################################################
+DFcsv2Rds(File_path, Type="wikidata")
+file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
+```
+
+## Relation_PubChem_CID.nt
+
+```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_PubChem_CID.nt"
 Wikidata_PurseNT_Others(File_path)
-DFcsv2Rds(File_path)
+DFcsv2Rds(File_path, Type="wikidata")
+file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
+```
+
+
+
 

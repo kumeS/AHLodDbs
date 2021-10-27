@@ -72,6 +72,14 @@ b <- b[grepl("^wd:Q", b[,3]),]
 
 #convert matrix to DF
 d <- data.frame(b)
+#head(d); dim(d)
+
+if(any(unique(d$X2) == "wdt:P279")){
+  d$X2[d$X2 == "wdt:P279"] <- "rdfs:subClassOf"
+}
+if(any(unique(d$X2) == "wdt:P31")){
+  d$X2[d$X2 == "wdt:P31"] <- "rdf:instanceOf"
+}
 
 if(x == 1){
 readr::write_csv(d,

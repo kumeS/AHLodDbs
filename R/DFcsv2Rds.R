@@ -39,7 +39,7 @@ if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
 }
 
 message(paste0("Read data"))
-if(grepl("_df.nt$", File_path)){
+if(grepl(".nt$", File_path)){
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"),
                                   col_names = FALSE, progress=F, show_col_types = FALSE))
 }
@@ -71,6 +71,13 @@ Dat %>%
 
 YN <- askYesNo("Do you want to save its Rds?")
 if(!YN){return(message("No save"))}
+
+#Remove loops
+if(TypeL == "wikidata"){
+#head(Dat)
+message("Remove loops")
+Dat <- Dat[Dat$Subject != as.character(Dat$Object),]
+}
 
 message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
 saveRDS(Dat, file = paste0(sub(".nt$", "", File_path), "_df.Rds"))

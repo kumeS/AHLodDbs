@@ -7,10 +7,10 @@
 Proc_af_nkf(File_path)
 }
 \arguments{
-\item{File_path}{a character vector for a N-triple (NT) file (.nt).}
+\item{File_path}{a character vector for a N-triple (NT) file (.nt) or CSV file.}
 }
 \value{
-Rdata
+Rds
 }
 \description{
 This function provide a Processing after the conversion from
