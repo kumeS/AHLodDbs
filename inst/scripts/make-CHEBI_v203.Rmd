@@ -1,0 +1,63 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data Dump Version: CHEBI v203 from NCBO BioPortal (https://bioportal.bioontology.org/)
+
+## Download the dump data
+
+```{r echo=TRUE, eval=FALSE}
+###################################################################
+# You should remove the single comment out "#".
+###################################################################
+##Install
+#devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
+library(AHLodDbs)
+
+##Create Directory
+if(!dir.exists("CHEBI")){dir.create("CHEBI")}
+
+##Download the datadump (v203) from Google drive  
+browseURL("https://drive.google.com/file/d/1OPcxn3lYgW2sxgmfG2oZ9-QBp4p74k5s/view?usp=sharing")
+
+#move to the Dump folder
+```
+
+## Decompress the bz2 file
+
+```{r echo=TRUE, eval=FALSE}
+setwd("./CHEBI")
+getwd()
+dir()
+
+##rename
+#system("mv CHEBI_v203.nt Dump.nt")
+```
+
+## Pre-Processing on R via sh scripts
+
+```{r echo=TRUE, eval=FALSE}
+##extract English labels
+#system('grep -e " <http://www.w3.org/2000/01/rdf-schema#label> " ./Dump.nt > ./Label_en_rdfs.nt')
+
+##extract class hierarchy
+#system('grep -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Dump.nt > ./Relation_i.nt')
+#system('grep -v -e "> _:" ./Relation_i.nt > ./Relation_subClassOf.nt')
+
+
+##Others
+#system("grep -v -e ' <http://www.w3.org/2000/01/rdf-schema#label> ' ./Dump.nt > ./Others_i.nt")
+#system('grep -v -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Others_i.nt > ./Relation_Others.nt')
+
+##Remove files
+#system('rm -rf ./Dump.nt ./Relation_i.nt ./Others_i.nt')
+#system('ls -ul -h')
+```
+
+
+
+
+
+

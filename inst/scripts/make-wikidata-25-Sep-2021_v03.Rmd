@@ -139,13 +139,13 @@ table(grepl("^wd:Q", Dat$Object))
 ```{r echo=TRUE, eval=FALSE}
 ##rdfs:label
 File_path <- "./Dump/Label_en_rdfs.nt"
-Wikidata_PurseNT_Label(File_path)
-DFcsv2Rds(File_path, Type="wikilabel")
+Wikidata_PurseNT_Label(File_path, readr=T, tsv=T)
+DFtsv2Rds(File_path, Type="wikilabel")
 
 ##Altlabel
 File_path <- "./Dump/Label_en_Altlabel.nt"
-Wikidata_PurseNT_Label(File_path)
-DFcsv2Rds(File_path, Type="wikilabel")
+Wikidata_PurseNT_Label(File_path, readr=T, tsv=T)
+DFtsv2Rds(File_path, Type="wikilabel")
 
 if(F){
 ##Check Data
@@ -159,12 +159,24 @@ table(Dat$OtherInfo)
 }
 
 #Bind labels
-Label_en_rdfs_df <- readRDS("./Dump/Label_en_rdfs_df.Rds")
-Label_en_Altlabel_df <- readRDS("./Dump/Label_en_Altlabel_df.Rds")
+Label_en_rdfs_df <- readr::read_tsv("./Dump/Label_en_rdfs_df.tsv", col_names = F, show_col_types = F)
+Label_en_Altlabel_df <- readr::read_tsv("./Dump/Label_en_Altlabel_df.tsv", col_names = F, show_col_types = F)
 #head(Label_en_rdfs_df); head(Label_en_Altlabel_df)
+table(Label_en_rdfs_df$X4)
+table(Label_en_Altlabel_df$X4)
+
+X <- 1:1000000
+table(grepl("\\\\\\\\", Label_en_rdfs_df$X3[X]))
+head(Label_en_rdfs_df$X3[X][grepl("\\\\\\\\", Label_en_rdfs_df$X3[X])])
+table(grepl("\\\\", Label_en_rdfs_df$X3[X]))
+head(Label_en_rdfs_df$X3[X][grepl("\\\\", Label_en_rdfs_df$X3[X])])
+
+
+
 Label_en_All <- rbind(Label_en_rdfs_df, Label_en_Altlabel_df)
 dim(Label_en_All)
 saveRDS(Label_en_All, "./Dump/Label_en_All.Rds")
+
 
 ```
 
@@ -179,7 +191,7 @@ Wikidata_PurseNT_Label(File_path)
 
 ##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
-Proc_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
+ProcCSV_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
 file.remove(c("./Dump/Label_ja_rdfs_df_nkf.csv", "./Dump/Label_ja_rdfs_df.csv"))
 
 if(F){
@@ -199,13 +211,17 @@ Wikidata_PurseNT_Label(File_path)
 
 ##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
-Proc_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
+ProcCSV_af_nkf(File_path=sub(".nt$", "_df_nkf.csv", File_path))
 file.remove(c("./Dump/Label_ja_Altlabel_df.csv", "./Dump/Label_ja_Altlabel_df_nkf.csv"))
 
 #Bind labels
 Label_ja_rdfs_df <- readRDS("./Dump/Label_ja_rdfs_df.Rds")
 Label_ja_Altlabel_df <- readRDS("./Dump/Label_ja_Altlabel_df.Rds")
+
 #head(Label_ja_rdfs_df); head(Label_ja_Altlabel_df)
+#table(Label_ja_rdfs_df$OtherInfo)
+#table(Label_ja_Altlabel_df$OtherInfo)
+
 Label_ja_All <- rbind(Label_ja_rdfs_df, Label_ja_Altlabel_df)
 dim(Label_ja_All)
 saveRDS(Label_ja_All, "./Dump/Label_ja_All.Rds")
