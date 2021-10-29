@@ -7,7 +7,7 @@
 ##'
 ##' @return Rds
 ##' @author Satoshi Kume
-##' @export Proc_af_nkf
+##' @export ProcCSV_af_nkf
 ##'
 ##' @importFrom magrittr %>%
 ##' @importFrom stringr str_detect
@@ -18,12 +18,12 @@
 ##' @examples \dontrun{
 ##'
 ##' File_path <- "./Label_en_rdfs.nt"
-##' Proc_af_nkf(File_path)
+##' ProcCSV_af_nkf(File_path)
 ##'
 ##' }
 ##'
 
-Proc_af_nkf <- function(File_path){
+ProcCSV_af_nkf <- function(File_path){
 if(!any(grepl(".nt$", File_path), grepl(".csv$", File_path))){
   return(message("Warning: Not proper value of File_path"))
 }
@@ -32,6 +32,7 @@ if(grepl(".nt$", File_path)){
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt$", "", File_path), "_df.csv"),
                                   col_names = FALSE, show_col_types = FALSE))
 }
+
 if(grepl(".csv$", File_path)){
 Dat <- data.frame(readr::read_csv(File_path,
                                   col_names = FALSE, show_col_types = FALSE))

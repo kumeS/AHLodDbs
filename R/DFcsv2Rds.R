@@ -1,6 +1,7 @@
 ##' @title Convert CSV file to Rds file
 ##'
 ##' @param File_path a character vector for a N-triple (NT) file (.nt).
+##' @param Type a type of dataset; select it from Mesh, MeshLabel, wikidata, wikilabel and ID
 ##'
 ##' @description This function convert the CSV file gained through the
 ##' PurseNT functions to Rds. Then it check the data table.
