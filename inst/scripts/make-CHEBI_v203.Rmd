@@ -15,7 +15,10 @@ editor_options:
 ##Install
 #devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
 library(AHLodDbs)
+<<<<<<< HEAD
 library(magrittr)
+=======
+>>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 
 ##Create Directory
 if(!dir.exists("CHEBI")){dir.create("CHEBI")}
@@ -47,6 +50,10 @@ dir()
 #system('grep -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Dump.nt > ./Relation_i.nt')
 #system('grep -v -e "> _:" ./Relation_i.nt > ./Relation_subClassOf.nt')
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 ##Others
 #system("grep -v -e ' <http://www.w3.org/2000/01/rdf-schema#label> ' ./Dump.nt > ./Others_i.nt")
 #system('grep -v -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Others_i.nt > ./Relation_Others.nt')
@@ -54,6 +61,7 @@ dir()
 ##Remove files
 #system('rm -rf ./Dump.nt ./Relation_i.nt ./Others_i.nt')
 #system('ls -ul -h')
+<<<<<<< HEAD
 
 ```
 
@@ -78,4 +86,12 @@ DFtsv2Rds(File_path, Type="CHEBI")
 Dat <- readRDS("./CHEBI/Relation_subClassOf_df.Rds")
 head(Dat)
 ```
+=======
+```
+
+
+
+
+
+>>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 

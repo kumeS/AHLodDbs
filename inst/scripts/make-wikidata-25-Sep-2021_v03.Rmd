@@ -159,9 +159,10 @@ table(Dat$OtherInfo)
 }
 
 #Bind labels
-Label_en_rdfs_df <- readRDS("./Dump/Label_en_rdfs_df.Rds")
-Label_en_Altlabel_df <- readRDS("./Dump/Label_en_Altlabel_df.Rds")
+Label_en_rdfs_df <- readr::read_tsv("./Dump/Label_en_rdfs_df.tsv", col_names = F, show_col_types = F)
+Label_en_Altlabel_df <- readr::read_tsv("./Dump/Label_en_Altlabel_df.tsv", col_names = F, show_col_types = F)
 #head(Label_en_rdfs_df); head(Label_en_Altlabel_df)
+<<<<<<< HEAD
 
 table(Label_en_rdfs_df$OtherInfo)
 #table(grepl("\\\\\\\\", Label_en_rdfs_df$Object))
@@ -169,10 +170,23 @@ table(Label_en_rdfs_df$OtherInfo)
 table(Label_en_Altlabel_df$OtherInfo)
 #table(grepl("\\\\\\\\", Label_en_Altlabel_df$Object))
 #head(Label_en_Altlabel_df$Object[grepl("\\\\\\\\", Label_en_Altlabel_df$Object)])
+=======
+table(Label_en_rdfs_df$X4)
+table(Label_en_Altlabel_df$X4)
+
+X <- 1:1000000
+table(grepl("\\\\\\\\", Label_en_rdfs_df$X3[X]))
+head(Label_en_rdfs_df$X3[X][grepl("\\\\\\\\", Label_en_rdfs_df$X3[X])])
+table(grepl("\\\\", Label_en_rdfs_df$X3[X]))
+head(Label_en_rdfs_df$X3[X][grepl("\\\\", Label_en_rdfs_df$X3[X])])
+
+
+>>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 
 Label_en_All <- rbind(Label_en_rdfs_df, Label_en_Altlabel_df)
 dim(Label_en_All)
 saveRDS(Label_en_All, "./Dump/Label_en_All.Rds")
+
 
 ```
 
