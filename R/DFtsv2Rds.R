@@ -1,10 +1,7 @@
 ##' @title Convert TSV file to Rds file
 ##'
 ##' @param File_path a character vector for a N-triple (NT) file (.nt).
-<<<<<<< HEAD
 ##' @param Type a type of dataset; select it from Mesh, MeshLabel, wikidata, wikilabel, CHEBI, CHEBIlabel and ID
-=======
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 ##'
 ##' @description This function convert the TSV file gained through the
 ##' PurseNT functions to Rds. Then it check the data table.
@@ -17,11 +14,8 @@
 ##' @importFrom magrittr %>%
 ##'
 ##' @examples \dontrun{
-<<<<<<< HEAD
 ##' #Not Run
-=======
 ##'
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 ##' #rdfs:label
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
@@ -33,7 +27,6 @@
 ##'
 
 DFtsv2Rds <- function(File_path, Type){
-<<<<<<< HEAD
 if(length(Type) != 1){ return(message("Warning: No proper value of Type")) }
 if(!any(Type == c("Mesh", "MeSH", "mesh", "MeshLabel", "meshlabel",
                   "Wikidata", "wikidata", "WikiData", "ID",
@@ -41,12 +34,7 @@ if(!any(Type == c("Mesh", "MeSH", "mesh", "MeshLabel", "meshlabel",
                   "CHEBI", "ChEBI", "chebi",
                   "CHEBIlabel", "ChEBIlabel", "chebilabel",
                   "CHEBILabel", "ChEBILabel", "chebiLabel"))){
-=======
-if(!any(Type == c("Mesh", "MeSH", "mesh", "MeshLabel", "meshlabel",
-                  "Wikidata", "wikidata", "WikiData", "ID",
-                  "wikilabel", "wikiLabel", "WikiLabel", "Wikilabel"))){
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
-  return(message("Warning: No proper value of Type"))
+return(message("Warning: No proper value of Type"))
 }
 
 if(grepl("_df.tsv$", File_path)){ File_path <- sub("_df.tsv$", ".nt", File_path) }
@@ -70,7 +58,6 @@ Dat <- data.frame(readr::read_tsv(paste0(sub(".nt$", "", File_path), ".tsv"),
 #table(Dat$X4)
 TypeL <- tolower(Type)
 switch(TypeL,
-<<<<<<< HEAD
        "mesh" = if(ncol(Dat) != 4){return(message("Warning: No proper value of Data"))},
        "meshlabel" = if(ncol(Dat) != 4){return(message("Warning: No proper value of Data"))},
        "wikidata" = if(ncol(Dat) != 3){return(message("Warning: No proper value of Data"))},
@@ -81,17 +68,12 @@ switch(TypeL,
        )
 
 switch(TypeL,
-=======
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
        "mesh" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "meshlabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
        "wikidata" = colnames(Dat) <- c("Subject", "Property", "Object"),
        "wikilabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
-<<<<<<< HEAD
        "chebi" = colnames(Dat) <- c("Subject", "Property", "Object"),
        "chebilabel" = colnames(Dat) <- c("Subject", "Property", "Object", "OtherInfo"),
-=======
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
        "id" = colnames(Dat) <- c("Subject", "Property", "Object")
        )
 
@@ -121,15 +103,12 @@ message("Remove loops")
 Dat <- Dat[Dat$Subject != as.character(Dat$Object),]
 }
 
-<<<<<<< HEAD
 if(TypeL == "wikilabel"){
 message("Remove \\\\\\\\")
 if(any(stringr::str_detect(Dat[,3], pattern = "\\\\\\\\"), na.rm = TRUE)){
 for(n in 1:6){Dat[,3] <- sub("\\\\\\\\", " ", Dat[,3])}
 }
-=======
 #Remove \\\\\\\\ etc
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 if(any(stringr::str_detect(Dat[,3], pattern = "\\\\\\\\"), na.rm = TRUE)){
 for(n in 1:6){Dat[,3] <- sub("\\\\\\\\", " ", Dat[,3])}
 }
@@ -138,7 +117,6 @@ for(n in 1:6){Dat[,3] <- sub("\\\\\\\\", " ", Dat[,3])}
 }
 
 #Change double spaces to single space
-<<<<<<< HEAD
 message("Change double spaces to single space")
 if(any(stringr::str_detect(Dat[,3], pattern = "  "), na.rm = TRUE)){
 for(n in 1:6){Dat[,3] <- sub("  ", " ", Dat[,3])}
@@ -146,10 +124,8 @@ for(n in 1:6){Dat[,3] <- sub("  ", " ", Dat[,3])}
 if(any(stringr::str_detect(Dat[,3], pattern = "  "), na.rm = TRUE)){
 for(n in 1:6){Dat[,3] <- sub("  ", " ", Dat[,3])}
 }
-=======
 if(any(stringr::str_detect(Dat[,3], pattern = "[ ][ ]"), na.rm = TRUE)){
 for(n in 1:6){Dat[,3] <- sub("[ ][ ]", "[ ]", Dat[,3])}
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 }
 
 message(paste0('dim(Dat): ', paste0(dim(Dat), collapse = " ")))
@@ -158,6 +134,8 @@ saveRDS(Dat, file = paste0(sub(".nt$", "", File_path), "_df.Rds"))
 return(message("Finished!!"))
 
 }
+}
+
 
 
 

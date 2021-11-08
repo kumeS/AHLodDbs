@@ -8,6 +8,8 @@ DFcsv2Rds(File_path, Type)
 }
 \arguments{
 \item{File_path}{a character vector for a N-triple (NT) file (.nt).}
+
+\item{Type}{a type of dataset; select it from Mesh, MeshLabel, wikidata, wikilabel and ID}
 }
 \value{
 Rds

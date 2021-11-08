@@ -4,12 +4,14 @@
 \alias{Wikidata_PurseNT_Label}
 \title{Convert labels to CSV file for Wikidata dump}
 \usage{
-Wikidata_PurseNT_Label(File_path, readr = F)
+Wikidata_PurseNT_Label(File_path, readr = T, tsv = F)
 }
 \arguments{
 \item{File_path}{a character vector for a N-triple (NT) file (.nt).}
 
 \item{readr}{use readr function or not}
+
+\item{tsv}{save as TSV format}
 }
 \value{
 CSV file

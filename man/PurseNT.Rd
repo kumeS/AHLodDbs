@@ -2,20 +2,22 @@
 % Please edit documentation in R/PurseNT.R
 \name{PurseNT}
 \alias{PurseNT}
-\title{Convert the triples  to the CSV file}
+\title{Convert the triples  to the CSV or TSV file}
 \usage{
-PurseNT(File_path)
+PurseNT(File_path, tsv = TRUE)
 }
 \arguments{
 \item{File_path}{a character vector,
 indicating a N-triple (NT) file path (.nt).}
+
+\item{tsv}{save as TSV format}
 }
 \value{
-CSV file
+CSV or TSV file
 }
 \description{
 This function use the NT file and
-convert from the small dump dataset (less than nearly 2GB) to CSV file.
+convert from the small dump dataset (less than nearly 2GB) to CSV or TSV file.
 }
 \examples{
 \dontrun{

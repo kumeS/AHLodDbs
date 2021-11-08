@@ -15,10 +15,7 @@ editor_options:
 ##Install
 #devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
 library(AHLodDbs)
-<<<<<<< HEAD
 library(magrittr)
-=======
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 
 ##Create Directory
 if(!dir.exists("CHEBI")){dir.create("CHEBI")}
@@ -50,10 +47,6 @@ dir()
 #system('grep -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Dump.nt > ./Relation_i.nt')
 #system('grep -v -e "> _:" ./Relation_i.nt > ./Relation_subClassOf.nt')
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 ##Others
 #system("grep -v -e ' <http://www.w3.org/2000/01/rdf-schema#label> ' ./Dump.nt > ./Others_i.nt")
 #system('grep -v -e " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " ./Others_i.nt > ./Relation_Others.nt')
@@ -61,19 +54,29 @@ dir()
 ##Remove files
 #system('rm -rf ./Dump.nt ./Relation_i.nt ./Others_i.nt')
 #system('ls -ul -h')
-<<<<<<< HEAD
 
 ```
 
 ## For English Labels
 
 ```{r echo=TRUE, eval=FALSE}
+setwd("../")
+
 File_path <- "./CHEBI/Label_en_rdfs.nt"
 PurseNT_Label(File_path)
 DFtsv2Rds(File_path, Type="CHEBIlabel")
 
 Dat <- readRDS("./CHEBI/Label_en_rdfs_df.Rds")
 head(Dat)
+
+table(substr(Dat$Subject, start=1, stop=4))
+table(Dat$Property)
+table(Dat$OtherInfo)
+
+#Rename
+file.rename(from="./CHEBI/Label_en_rdfs_df.Rds",
+            to="./CHEBI/ChEBI_Label_en_rdfs_df.Rds")
+  
 ```
 
 ## For Class Hierarchy
@@ -85,13 +88,14 @@ DFtsv2Rds(File_path, Type="CHEBI")
 
 Dat <- readRDS("./CHEBI/Relation_subClassOf_df.Rds")
 head(Dat)
+
+table(substr(Dat$Subject, start=1, stop=4))
+table(Dat$Property)
+table(substr(Dat$Object, start=1, stop=4))
+
+#Rename
+file.rename(from="./CHEBI/Relation_subClassOf_df.Rds",
+            to="./CHEBI/ChEBI_Relation_subClassOf_df.Rds")
+
 ```
-=======
-```
-
-
-
-
-
->>>>>>> b55e2115b3493440c16d6bad9cfe565a6455bd53
 

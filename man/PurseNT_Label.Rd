@@ -2,37 +2,32 @@
 % Please edit documentation in R/PurseNT_Label.R
 \name{PurseNT_Label}
 \alias{PurseNT_Label}
-\title{Convert labels to CSV file}
+\title{Convert labels to CSV or TSV file}
 \usage{
-PurseNT_Label(
-  File_path,
-  Subject = c("http://id.nlm.nih.gov/mesh/2019/", "mesh2019:",
-    "http://id.nlm.nih.gov/mesh/2020/", "mesh2020:", "http://id.nlm.nih.gov/mesh/2021/",
-    "mesh2021:", "http://id.nlm.nih.gov/mesh/", "mesh:"),
-  Property = c("http://id.nlm.nih.gov/mesh/vocab#", "meshv:",
-    "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:",
-    "http://www.w3.org/2000/01/rdf-schema#", "rdfs:")
-)
+PurseNT_Label(File_path, tsv = TRUE)
 }
 \arguments{
 \item{File_path}{a character vector for a N-triple (NT) file (.nt).}
+
+\item{tsv}{save as TSV format}
 }
 \value{
-CSV file
+CSV or TSV file
 }
 \description{
-This function convert the NT file from the Mesh dump
-to CSV file.
+This function convert the NT file from the RDF dump
+to CSV or TSV file.
 }
 \examples{
 \dontrun{
+#Not run
 
 #rdfs:label
 File_path <- "./Label_en_rdfs.nt"
 
 #Run
 PurseNT_Label(File_path)
-DFcsv2Rdata(File_path)
+DFtsv2Rdata(File_path)
 
 }
 
