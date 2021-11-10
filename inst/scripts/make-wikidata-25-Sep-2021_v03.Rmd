@@ -13,7 +13,7 @@ editor_options:
 # You should remove the single comment out "#".
 ###################################################################
 ##Install
-#devtools::install_github( "kumeS/AHLodDbs", force = TRUE)
+#devtools::install_github( "kumeS/AHLodDbs", force = TRUE, dependencies = TRUE)
 library(AHLodDbs)
 
 ##Create Directory
