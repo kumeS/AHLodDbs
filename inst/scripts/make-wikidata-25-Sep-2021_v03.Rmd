@@ -162,7 +162,6 @@ table(Dat$OtherInfo)
 Label_en_rdfs_df <- readr::read_tsv("./Dump/Label_en_rdfs_df.tsv", col_names = F, show_col_types = F)
 Label_en_Altlabel_df <- readr::read_tsv("./Dump/Label_en_Altlabel_df.tsv", col_names = F, show_col_types = F)
 #head(Label_en_rdfs_df); head(Label_en_Altlabel_df)
-<<<<<<< HEAD
 
 table(Label_en_rdfs_df$OtherInfo)
 #table(grepl("\\\\\\\\", Label_en_rdfs_df$Object))
@@ -170,7 +169,7 @@ table(Label_en_rdfs_df$OtherInfo)
 table(Label_en_Altlabel_df$OtherInfo)
 #table(grepl("\\\\\\\\", Label_en_Altlabel_df$Object))
 #head(Label_en_Altlabel_df$Object[grepl("\\\\\\\\", Label_en_Altlabel_df$Object)])
-=======
+
 table(Label_en_rdfs_df$X4)
 table(Label_en_Altlabel_df$X4)
 
