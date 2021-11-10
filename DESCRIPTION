@@ -13,7 +13,9 @@ Depends: R (>= 4.0.0)
 Imports: markdown, 
   rmarkdown, 
   knitr,
-  magrittr
+  magrittr,
+  readr,
+  stringr
 Suggests: BiocStyle
 Description: This package provides a processing workflow for converting 
   RDF dump data (Wikidata, MeSH, and ChEBI) as a R data frame format.
