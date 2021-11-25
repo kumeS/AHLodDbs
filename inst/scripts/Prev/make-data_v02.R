@@ -1,6 +1,6 @@
 library(magrittr)
 
-PurseNT_ClassHierarchy <- function(File_path){
+ParseNT_ClassHierarchy <- function(File_path){
 con_file <- file(description = File_path, open = "r")
 print(con_file)
 #close(con_file)
@@ -10,7 +10,7 @@ x <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 print(paste0("No: ", x, " Line: ", x*N ))
@@ -67,7 +67,7 @@ readr::write_csv(d,
 
 ############################################################
 ############################################################
-PurseNT_Label <- function(File_path){
+ParseNT_Label <- function(File_path){
 con_file <- file(description = File_path, open = "r")
 print(con_file)
 #close(con_file)
@@ -142,7 +142,7 @@ readr::write_csv(d,
 
 ############################################################
 ############################################################
-PurseNT_Others <- function(File_path){
+ParseNT_Others <- function(File_path){
 con_file <- file(description = File_path, open = "r")
 print(con_file)
 #close(con_file)
@@ -152,7 +152,7 @@ x <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 print(paste0("No: ", x, " Line: ", x*N ))
@@ -209,7 +209,7 @@ readr::write_csv(d,
 
 ############################################################
 ############################################################
-PurseNT_Prop <- function(File_path){
+ParseNT_Prop <- function(File_path){
 con_file <- file(description = File_path, open = "r")
 print(con_file)
 #close(con_file)
@@ -219,7 +219,7 @@ x <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 print(paste0("No: ", x, " Line: ", x*N ))

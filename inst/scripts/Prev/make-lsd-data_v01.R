@@ -24,19 +24,19 @@ library(filesstrings)
 
 #lsd_20190903.nt
 File_path <- "./LSD_RDF/v01_raw/lsd_20190903.nt"
-Mesh_PurseNT(File_path)
+Mesh_ParseNT(File_path)
 
 filesstrings::file.move(File_path, sub("v01_raw", "v01", File_path))
 DFcsv2Rds(File_path, Type="Mesh")
 
 #Mesh2020
 File_path <- "./Mesh/mesh2020_others.nt"
-Mesh_PurseNT(File_path)
+Mesh_ParseNT(File_path)
 DFcsv2Rds(File_path, Type="Mesh")
 
 #Mesh2021
 File_path <- "./Mesh/mesh2021_others.nt"
-Mesh_PurseNT(File_path)
+Mesh_ParseNT(File_path)
 DFcsv2Rds(File_path, Type="Mesh")
 
 #Mesh2019 + Mesh2020 + Mesh2021
@@ -48,15 +48,15 @@ DFcsv2Rds(File_path, Type="Mesh")
 ##For English Labels
 ######################################################
 File_path <- "./Mesh/mesh2019_Label_en.nt"
-Mesh_PurseNT_Label(File_path)
+Mesh_ParseNT_Label(File_path)
 DFcsv2Rds(File_path,  Type="MeshLabel")
 
 File_path <- "./Mesh/mesh2020_Label_en.nt"
-Mesh_PurseNT_Label(File_path)
+Mesh_ParseNT_Label(File_path)
 DFcsv2Rds(File_path,  Type="MeshLabel")
 
 File_path <- "./Mesh/mesh2021_Label_en.nt"
-Mesh_PurseNT_Label(File_path)
+Mesh_ParseNT_Label(File_path)
 DFcsv2Rds(File_path,  Type="MeshLabel")
 
 #Mesh2019 + Mesh2020 + Mesh2021

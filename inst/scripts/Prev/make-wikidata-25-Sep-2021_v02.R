@@ -91,7 +91,7 @@ library(AHLodDbs)
 ##For Relation_P279_P31.nt
 ######################################################
 File_path <- "./Dump/Relation_P279_P31.nt"
-Wikidata_PurseNT_ClassHierarchy(File_path)
+Wikidata_ParseNT_ClassHierarchy(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(c("./Dump/Relation_P279_P31_df.csv"))
 
@@ -111,17 +111,17 @@ table(grepl("^wd:Q", Dat$Object))
 ######################################################
 #rdfs:label
 File_path <- "./Dump/Label_en_rdfs.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 DFcsv2Rds(File_path, Type="wikilabel")
 
 #Altlabel
 File_path <- "./Dump/Label_en_Altlabel.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 DFcsv2Rds(File_path, Type="wikilabel")
 
 #description
 File_path <- "./Dump/Label_en_description.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 DFcsv2Rds(File_path, Type="wikilabel")
 
 
@@ -132,7 +132,7 @@ DFcsv2Rds(File_path, Type="wikilabel")
 #rdfs:label
 ##############################
 File_path <- "./Dump/Label_ja_rdfs.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 
 #Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
@@ -154,7 +154,7 @@ table(Dat$OtherInfo)
 #Altlabel
 ##############################
 File_path <- "./Dump/Label_ja_Altlabel.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 
 #Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
@@ -165,30 +165,30 @@ file.remove(c("./Dump/Label_ja_Altlabel_df.csv", "./Dump/Label_ja_Altlabel_df_nk
 #Relation_KEGG_ID.nt
 ######################################################
 File_path <- "./Dump/Relation_KEGG_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path)
 ######################################################
 #Relation_MeSH_term_ID.nt
 ######################################################
 File_path <- "./Dump/Relation_MeSH_term_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path)
 ######################################################
 #Relation_MeSH_descriptor_ID.nt
 ######################################################
 File_path <- "./Dump/Relation_MeSH_descriptor_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path)
 ######################################################
 #Relation_NCBI_taxonomy_ID.nt
 ######################################################
 File_path <- "./Dump/Relation_NCBI_taxonomy_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path)
 ######################################################
 #Relation_PubChem_CID.nt
 ######################################################
 File_path <- "./Dump/Relation_PubChem_CID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path)
 

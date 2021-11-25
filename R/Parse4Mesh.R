@@ -1,4 +1,4 @@
-##' @title Purse Mesh data to a new class hierarchy
+##' @title Parse Mesh data to a new class hierarchy
 ##'
 ##' @param File_path a character vector for a N-triple (NT) file (.nt).
 ##' @param Labels a logical
@@ -6,19 +6,19 @@
 ##' @description This function convert to a new class hierarchy.
 ##'
 ##' @author Satoshi Kume
-##' @export Purse4Mesh
+##' @export Parse4Mesh
 ##' @importFrom magrittr %>%
 ##'
 ##' @examples \dontrun{
 ##'
 ##' #Run
 ##' File_path <- "./Label_en_rdfs.nt"
-##' Purse4Mesh(File_path)
+##' Parse4Mesh(File_path)
 ##'
 ##' }
 ##'
 
-Purse4Mesh <- function(File_path, Labels=FALSE){
+Parse4Mesh <- function(File_path, Labels=FALSE){
 
 if(any(dir() == sub("^./", "", paste0(sub(".nt$", "", File_path), "_df.Rds")))){
 File_path00 <- paste0(sub(".nt$", "", File_path), "_df.Rds")

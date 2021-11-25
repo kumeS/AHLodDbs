@@ -9,7 +9,7 @@
 ##'
 ##' @return CSV file
 ##' @author Satoshi Kume
-##' @export Wikidata_PurseNT_Label
+##' @export Wikidata_ParseNT_Label
 ##' @importFrom readr write_csv
 ##'
 ##' @examples \dontrun{
@@ -18,13 +18,13 @@
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
 ##' #Run
-##' Wikidata_PurseNT_Label(File_path)
+##' Wikidata_ParseNT_Label(File_path)
 ##' DFcsv2Rds(File_path)
 ##'
 ##' }
 ##'
 
-Wikidata_PurseNT_Label <- function(File_path, readr=T, tsv=F){
+Wikidata_ParseNT_Label <- function(File_path, readr=T, tsv=F){
 if(!grepl(".nt$", File_path)){return(message("Warning: Not proper value of File_path"))}
 con_file <- file(description = File_path, open = "r")
 print(con_file)

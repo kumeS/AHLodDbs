@@ -7,7 +7,7 @@
 ##'
 ##' @return CSV file
 ##' @author Satoshi Kume
-##' @export Wikidata_PurseNT_ClassHierarchy
+##' @export Wikidata_ParseNT_ClassHierarchy
 ##' @importFrom readr write_csv
 ##'
 ##' @examples \dontrun{
@@ -16,13 +16,13 @@
 ##' File_path <- "./Relation_P279_P31.nt"
 ##'
 ##' #Run
-##' Wikidata_PurseNT_ClassHierarchy(File_path)
+##' Wikidata_ParseNT_ClassHierarchy(File_path)
 ##' DFcsv2Rdata(File_path)
 ##'
 ##' }
 ##'
 
-Wikidata_PurseNT_ClassHierarchy <- function(File_path){
+Wikidata_ParseNT_ClassHierarchy <- function(File_path){
 if(!grepl(".nt$", File_path)){return(message("Warning: Not proper value of File_path"))}
 con_file <- file(description = File_path, open = "r")
 print(con_file)
@@ -32,7 +32,7 @@ x <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 message(paste0("No: ", formatC(x, width=4, flag="0"), " read lines: ", x*N ))

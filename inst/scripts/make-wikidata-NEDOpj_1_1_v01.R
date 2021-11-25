@@ -9,7 +9,7 @@ getwd(); dir()
 ######################################################
 library(AHLodDbs)
 File_path <- "./NEDOpj_1_1.nt"
-Wikidata_PurseNT_ClassHierarchy(File_path)
+Wikidata_ParseNT_ClassHierarchy(File_path)
 DFcsv2Rds(File_path, Type = "wikidata")
 
 #che
@@ -32,7 +32,7 @@ setwd("./AHLodDbs_02_Dataset_v01/NEDOpj")
 
 #rdfs:label
 File_path <- "./WikidataRDF-10-Apr-2021/Label_en_rdfs.nt"
-PurseNT_Label(File_path)
+ParseNT_Label(File_path)
 DFcsv2Rdata(File_path)
 
 #主語の略語

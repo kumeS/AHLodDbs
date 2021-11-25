@@ -16,7 +16,7 @@ Rds
 }
 \description{
 This function convert the CSV file gained through the
-PurseNT functions to Rds. Then it check the data table.
+ParseNT functions to Rds. Then it check the data table.
 }
 \examples{
 \dontrun{
@@ -25,7 +25,7 @@ PurseNT functions to Rds. Then it check the data table.
 File_path <- "./Label_en_rdfs.nt"
 
 #Run
-PurseNT_Label(File_path)
+ParseNT_Label(File_path)
 DFcsv2Rds(File_path)
 
 }

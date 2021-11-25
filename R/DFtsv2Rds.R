@@ -4,7 +4,7 @@
 ##' @param Type a type of dataset; select it from Mesh, MeshLabel, wikidata, wikilabel, CHEBI, CHEBIlabel and ID
 ##'
 ##' @description This function convert the TSV file gained through the
-##' PurseNT functions to Rds. Then it check the data table.
+##' ParseNT functions to Rds. Then it check the data table.
 ##'
 ##' @return Rds
 ##' @author Satoshi Kume
@@ -20,7 +20,7 @@
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
 ##' #Run
-##' PurseNT_Label(File_path, tsv=TRUE)
+##' ParseNT_Label(File_path, tsv=TRUE)
 ##' DFtsv2Rds(File_path)
 ##'
 ##' }

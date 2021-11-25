@@ -8,7 +8,7 @@
 ##'
 ##' @return CSV or TSV file
 ##' @author Satoshi Kume
-##' @export PurseNT_Label
+##' @export ParseNT_Label
 ##' @importFrom readr write_csv
 ##' @importFrom readr write_tsv
 ##'
@@ -19,13 +19,13 @@
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
 ##' #Run
-##' PurseNT_Label(File_path)
+##' ParseNT_Label(File_path)
 ##' DFtsv2Rdata(File_path)
 ##'
 ##' }
 ##'
 
-PurseNT_Label <- function(File_path,
+ParseNT_Label <- function(File_path,
                           tsv=TRUE){
 if(!grepl(".nt$", File_path)){return(message("Warning: Not proper value of File_path"))}
 

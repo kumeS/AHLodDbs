@@ -7,7 +7,7 @@
 ##'
 ##' @return CSV file
 ##' @author Satoshi Kume
-##' @export Wikidata_PurseNT_Others
+##' @export Wikidata_ParseNT_Others
 ##' @importFrom readr write_csv
 ##'
 ##' @examples \dontrun{
@@ -16,13 +16,13 @@
 ##' File_path <- "./Relation_KEGG_ID.nt"
 ##'
 ##' #Run
-##' Wikidata_PurseNT_Others(File_path)
+##' Wikidata_ParseNT_Others(File_path)
 ##' DFcsv2Rds(File_path)
 ##'
 ##' }
 ##'
 
-Wikidata_PurseNT_Others <- function(File_path){
+Wikidata_ParseNT_Others <- function(File_path){
 con_file <- file(description = File_path, open = "r")
 print(con_file)
 #close(con_file)
@@ -32,7 +32,7 @@ x <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 print(paste0("No: ", x, " Line: ", x*N ))

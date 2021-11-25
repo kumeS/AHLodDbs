@@ -117,7 +117,7 @@ library(magrittr)
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_P279_P31.nt"
-Wikidata_PurseNT_ClassHierarchy(File_path)
+Wikidata_ParseNT_ClassHierarchy(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 
@@ -139,12 +139,12 @@ table(grepl("^wd:Q", Dat$Object))
 ```{r echo=TRUE, eval=FALSE}
 ##rdfs:label
 File_path <- "./Dump/Label_en_rdfs.nt"
-Wikidata_PurseNT_Label(File_path, readr=T, tsv=T)
+Wikidata_ParseNT_Label(File_path, readr=T, tsv=T)
 DFtsv2Rds(File_path, Type="wikilabel")
 
 ##Altlabel
 File_path <- "./Dump/Label_en_Altlabel.nt"
-Wikidata_PurseNT_Label(File_path, readr=T, tsv=T)
+Wikidata_ParseNT_Label(File_path, readr=T, tsv=T)
 DFtsv2Rds(File_path, Type="wikilabel")
 
 if(F){
@@ -196,7 +196,7 @@ You need to install the `nkf` library via Homebrew if MacOSX.
 ```{r echo=TRUE, eval=FALSE}
 ##rdfs:label
 File_path <- "./Dump/Label_ja_rdfs.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 
 ##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
@@ -216,7 +216,7 @@ table(Dat$OtherInfo)
 
 ##Altlabel
 File_path <- "./Dump/Label_ja_Altlabel.nt"
-Wikidata_PurseNT_Label(File_path)
+Wikidata_ParseNT_Label(File_path)
 
 ##Convert their unicode (Escape character) to Multi-Byte Character (Japanese)
 system(paste0("cat ", sub(".nt$", "_df.csv", File_path), " | sed 's/\\\\u\\(....\\)/\\&#x\\1;/g' | nkf --numchar-input -w > ", sub(".nt$", "_df_nkf.csv", File_path)))
@@ -240,7 +240,7 @@ saveRDS(Label_ja_All, "./Dump/Label_ja_All.Rds")
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_KEGG_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 ```
@@ -249,7 +249,7 @@ file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_MeSH_descriptor_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 ```
@@ -258,7 +258,7 @@ file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_NCBI_taxonomy_ID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 ```
@@ -267,7 +267,7 @@ file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./Dump/Relation_PubChem_CID.nt"
-Wikidata_PurseNT_Others(File_path)
+Wikidata_ParseNT_Others(File_path)
 DFcsv2Rds(File_path, Type="wikidata")
 file.remove(paste0(sub(".nt$", "", File_path), "_df.csv"))
 ```

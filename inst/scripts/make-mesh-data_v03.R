@@ -36,7 +36,7 @@ library(magrittr)
 ##For English Labels
 ###################################################################
 File_path <- "./mesh2021_Label_en.nt"
-PurseNT_Label(File_path)
+ParseNT_Label(File_path)
 DFcsv2Rds(File_path,  Type="MeshLabel")
 
 ###################################################################
@@ -44,7 +44,7 @@ DFcsv2Rds(File_path,  Type="MeshLabel")
 ###################################################################
 #Mesh2021
 File_path <- "./mesh2021_others.nt"
-PurseNT(File_path)
+ParseNT(File_path)
 DFcsv2Rds(File_path, Type="Mesh")
 
 ###################################################################

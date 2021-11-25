@@ -63,7 +63,7 @@ dir()
 setwd("../")
 
 File_path <- "./CHEBI/Label_en_rdfs.nt"
-PurseNT_Label(File_path)
+ParseNT_Label(File_path)
 DFtsv2Rds(File_path, Type="CHEBIlabel")
 
 Dat <- readRDS("./CHEBI/Label_en_rdfs_df.Rds")
@@ -83,7 +83,7 @@ file.rename(from="./CHEBI/Label_en_rdfs_df.Rds",
 
 ```{r echo=TRUE, eval=FALSE}
 File_path <- "./CHEBI/Relation_subClassOf.nt"
-PurseNT(File_path)
+ParseNT(File_path)
 DFtsv2Rds(File_path, Type="CHEBI")
 
 Dat <- readRDS("./CHEBI/Relation_subClassOf_df.Rds")

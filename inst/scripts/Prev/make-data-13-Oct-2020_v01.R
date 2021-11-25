@@ -80,7 +80,7 @@ dir()
 File_path <- "./Relation_P279_P31.nt"
 
 #Run
-PurseNT_ClassHierarchy(File_path)
+ParseNT_ClassHierarchy(File_path)
 #close(con_file)
 
 #Check the data
@@ -107,7 +107,7 @@ system.time(readRDS(file = paste0(sub(".nt", "", File_path), "_df.Rdata")))
 #source("../AHWikiDataDbs/inst/scripts/make-data_v02.R")
 File_path <- "./Label_en_rdfs.nt"
 #Run
-PurseNT_Label(File_path)
+ParseNT_Label(File_path)
 #close(con_file)
 DFcsv2Rdata(File_path)
 
@@ -115,31 +115,31 @@ DFcsv2Rdata(File_path)
 #Relation_KEGG_ID.nt
 ######################################################
 File_path <- "./Relation_KEGG_ID.nt"
-PurseNT_Others(File_path)
+ParseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_MeSH_term_ID.nt
 ######################################################
 File_path <- "./Relation_MeSH_term_ID.nt"
-PurseNT_Others(File_path)
+ParseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_MeSH_descriptor_ID.nt
 ######################################################
 File_path <- "./Relation_MeSH_descriptor_ID.nt"
-PurseNT_Others(File_path)
+ParseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_NCBI_taxonomy_ID.nt
 ######################################################
 File_path <- "./Relation_NCBI_taxonomy_ID.nt"
-PurseNT_Others(File_path)
+ParseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 ######################################################
 #Relation_PubChem_CID.nt
 ######################################################
 File_path <- "./Relation_PubChem_CID.nt"
-PurseNT_Others(File_path)
+ParseNT_Others(File_path)
 DFcsv2Rdata(File_path)
 
 ######################################################
@@ -148,7 +148,7 @@ DFcsv2Rdata(File_path)
 #PropertyList_ja.nt
 ######################################################
 File_path <- "./PropertyList_at2.nt"
-PurseNT_Prop(File_path)
+ParseNT_Prop(File_path)
 DFcsv2Rdata(File_path)
 
 Dat <- data.frame(readr::read_csv(paste0(sub(".nt", "", File_path), "_df.csv"), col_names = FALSE))

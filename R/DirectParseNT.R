@@ -4,7 +4,7 @@
 ##' @param Type a type of dataset; select only Wikidata, CHEBI, or Mesh.
 ##'
 ##' @description This function convert the TSV file gained through the
-##' PurseNT functions to Rds. Then it check the data table.
+##' ParseNT functions to Rds. Then it check the data table.
 ##'
 ##' @return Rds
 ##' @author Satoshi Kume
@@ -19,14 +19,14 @@
 ##' File_path <- "./Label_en_rdfs.nt"
 ##'
 ##' #Run
-##' PurseNT_Label(File_path, tsv=TRUE)
+##' ParseNT_Label(File_path, tsv=TRUE)
 ##' DFtsv2Rds(File_path)
 ##'
 ##' }
 ##'
 
 
-DirectPurseNT <- function(File_path,
+DirectParseNT <- function(File_path,
                           Type="Wikidata"){
 
 if(length(Type) != 1){ return(message("Warning: No proper value of Type")) }
@@ -55,7 +55,7 @@ x5 <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 message(paste0("No: ", formatC(x, width=4, flag="0"), " read lines: ", x*N ))
@@ -172,7 +172,7 @@ x2 <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 message(paste0("No: ", formatC(x, width=4, flag="0"), " read lines: ", x*N ))
@@ -225,7 +225,7 @@ x2 <- 0
 #Rows per read
 N <- 100000
 
-#Purse NT file to CSV
+#Parse NT file to CSV
 while( TRUE ){
 x <- x + 1
 message(paste0("No: ", formatC(x, width=4, flag="0"), " read lines: ", x*N ))

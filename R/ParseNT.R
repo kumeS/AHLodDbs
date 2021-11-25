@@ -9,7 +9,7 @@
 ##'
 ##' @return CSV or TSV file
 ##' @author Satoshi Kume
-##' @export PurseNT
+##' @export ParseNT
 ##' @importFrom readr write_csv
 ##' @importFrom readr write_tsv
 ##' @importFrom readr read_lines
@@ -20,13 +20,13 @@
 ##' File_path <- "./mesh2019_others2.nt"
 ##'
 ##' # Run
-##' PurseNT(File_path)
+##' ParseNT(File_path)
 ##' DFcsv2Rdata(File_path)
 ##'
 ##' }
 ##'
 
-PurseNT <- function(File_path, tsv=TRUE){
+ParseNT <- function(File_path, tsv=TRUE){
 
 if(!grepl(".nt$", File_path)){return(message("Warning: Not proper value of File_path"))}
 
